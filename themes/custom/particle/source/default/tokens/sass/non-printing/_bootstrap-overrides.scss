@@ -1,0 +1,28 @@
+/*
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+Bootstrap Variable Customization
+--------------------------------------------------------------------------------
+  Bootstrap base variables:
+    @see ~bootstrap/scss/_variables.scss
+--------------------------------------------------------------------------------
+*/
+
+/*
+----------------------------------------
+Imports
+----------------------------------------
+  Bootstrap non-printing tools.
+  Imported after processors.
+----------------------------------------
+*/
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins';
+
+// Remove Unused Bootstrap Theme Colors
+// Use secondary for success
+$theme-colors: map-remove($theme-colors, 'success');
+$theme-colors: map-remove($theme-colors, 'danger');
+$theme-colors: map-remove($theme-colors, 'warning');
+$theme-colors: map-remove($theme-colors, 'info');

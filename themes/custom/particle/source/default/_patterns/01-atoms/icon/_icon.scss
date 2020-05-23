@@ -1,0 +1,28 @@
+// Custom styles for icon
+
+// The non-printing variables, functions, and mixins of 00-protons/variables
+// are provided to this file via:
+//   webpack.particle.js: sass-loader.data|includePaths
+
+// This generates an icon class whose content is set in the iconfont. The icons
+// will be rendered as a ligature of a string of chars (the icon name)
+@import '~material-icons/iconfont/material-icons.scss';
+
+.icon {
+  @include material-icons();
+}
+
+// IMPORTANT NOTE: To write a custom icon class, use this: However you should
+// note that the icon font is only loaded when loading this pattern so it is a
+// good idea to use it instead.
+
+// Example:
+// .mi-face {
+//  @include material-icon('face');
+// }
+.icon--add {
+  @include material-icon('add');
+}
+.icon--remove {
+  @include material-icon('remove');
+}

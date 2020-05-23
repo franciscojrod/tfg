@@ -1,0 +1,35 @@
+{#
+/**
+ * @file
+ * Theme override for an 'input' #type form element.
+ *
+ * Available variables:
+ * - attributes: A list of HTML attributes for the input element.
+ * - children: Optional additional rendered elements.
+ *
+ * @see template_preprocess_input()
+ */
+#}
+{% if attributes.type == 'submit' %}
+  {% include '@atoms/button/_button.twig' with {
+    button_element: 'input',
+    button_other_classes: ['btn-primary'] | merge(attributes.class|default([])),
+    button_other_attributes: attributes|without('class'),
+  } %}
+  {% elseif attributes.type == 'checkbox' or attributes.type == 'radio' %}
+  {% include '@atoms/input/_input.twig' with {
+    type: attributes.type,
+    input_other_classes: ['form-control'] | merge(attributes.class|default([])),
+    input_other_attributes: attributes|without('class'),
+    input_label: element['#title'],
+    form_group_label: 0,
+  } %}
+{% else %}
+  {# TODO: regarding the input-inverse class, we have to think what call "inverse" in inputs, because by default the body in white, and the inputs too, without border. #}
+  {% set input_other_attributes = create_attribute() %}
+  {% include '@atoms/input/_input.twig' with {
+    type: attributes.type,
+    input_other_classes: ['form-control', 'input-inverse'] | merge(attributes.class|default([])),
+    input_other_attributes: attributes|without('class'),
+  } %}
+{% endif %}

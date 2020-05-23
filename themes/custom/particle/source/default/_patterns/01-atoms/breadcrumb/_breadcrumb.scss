@@ -1,0 +1,36 @@
+// The non-printing variables, functions, and mixins of
+//   @import ~tokens/sass/non-printing/non-printing;
+// are provided to this file via:
+//   webpack.particle.js: sass-loader.data|includePaths
+
+
+
+.breadcrumb {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  min-height: rem-calc(30px);
+  padding: map-get($spacers, 1) 0;
+
+  i {
+    font-size: $font-size-md;
+    margin-right: map-get($spacers, 2);
+  }
+}
+
+.breadcrumb__item {
+  align-items: center;
+  color: map-get($theme-colors, 'blue-grey');
+  display: flex;
+  font-size: $font-size-xs;
+  margin-right: map-get($spacers, 2);
+  position: relative;
+
+  &:last-child {
+    font-weight: $font-weight-bold;
+  }
+}
+
+.breadcrumb__link {
+  color: inherit;
+}

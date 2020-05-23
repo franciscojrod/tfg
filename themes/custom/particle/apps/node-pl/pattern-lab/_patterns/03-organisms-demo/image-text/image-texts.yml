@@ -1,0 +1,11 @@
+section_1:
+  title: Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+  text: urto sanctus signiferumque ne mel, suas splendide at qui. Qui ei unum dolorum. Ea mei appareat atomorum sadipscing, enim duis electram ne sit, te ius habeo numquam maiestatis. Ei mutat aliquam nonume.
+  section_image: https://images.unsplash.com/photo-1442033025416-c6a7da752d71?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1140&h=685&q=80
+  image_position: image_left
+
+section_2:
+  title: Lorem ipsum dolor sit amet.
+  text: urto sanctus signiferumque ne mel, suas splendide at qui. Qui ei unum dolorum. Ea mei appareat atomorum sadipscing, enim duis electram ne sit, te ius habeo numquam maiestatis. Ei mutat aliquam nonumes usu.
+  section_image: https://images.unsplash.com/photo-1442033025416-c6a7da752d71?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1140&h=685&q=80
+  image_position: image_right

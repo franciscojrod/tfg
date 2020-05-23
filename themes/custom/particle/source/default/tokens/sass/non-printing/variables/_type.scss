@@ -1,0 +1,114 @@
+/*
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+Typography Variables
+--------------------------------------------------------------------------------
+*/
+
+/*
+----------------------------------------
+Font Sizes
+----------------------------------------
+  Override base Font Size values
+----------------------------------------
+  @see non-printing/_type.scss
+----------------------------------------
+*/
+
+$font-size-xs: 0.75rem; // = 12px
+$font-size-sm: 0.8125rem; // = 13px
+$font-size-md: 0.875rem; // = 14px
+$font-size-base: 1rem; // = 16px
+$font-size-lg: 1.125rem; // = 18px
+
+$h1-font-size: 2.625rem; // = 42px
+$h2-font-size: 2.25rem; // = 36px
+$h3-font-size: 1.75rem; // = 28pxs
+$h4-font-size: 1.375rem; // = 22px
+
+$headings-color: $color-midnight-blue !default;
+
+
+/*
+----------------------------------------
+Font Families Map
+----------------------------------------
+  Primary font families.
+----------------------------------------
+*/
+
+$font-families: (
+  sans: #{'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif},
+  monospace: #{'Source Code Pro', 'Courier New', monospace},
+  serif: #{'Oswald', 'Times New Roman', serif},
+  nunito: #{'Nunito Sans', 'Times New Roman', serif},
+);
+
+/*
+----------------------------------------
+Font Families
+----------------------------------------
+  Override base Font Family values
+----------------------------------------
+  @see non-printing/_type.scss
+----------------------------------------
+*/
+
+$font-family-serif: map-get($font-families, 'serif');
+$font-family-sans-serif: map-get($font-families, 'sans');
+$font-family-monospace: map-get($font-families, 'monospace');
+$font-family-nunito-sans: map-get($font-families, 'nunito');
+$font-family-base: $font-family-sans-serif;
+
+$headings-font-family: $font-family-nunito-sans;
+
+/*
+----------------------------------------
+Line Heights Map
+----------------------------------------
+  Primary line-heights.
+    All values assigned to sizes from
+    comp. No common values.
+----------------------------------------
+*/
+$line-heights: (
+  'tightest': 1.1,
+  'tighter': 1.25,
+  'tight': 1.33,
+  'base': 1.5,
+  'loose': 1.75,
+  'looser': 2,
+);
+$line-height-base: map-get($line-heights, 'base');
+/*
+
+----------------------------------------
+Letter Spacings Map
+----------------------------------------
+  Primary letter-spacings.
+    Map values should always pass through
+    letter-spacing function to apply
+    margin adjustments.
+----------------------------------------
+*/
+$letter-spacings: (
+  'reduce': -1px,
+  'base': normal,
+  'increase': 1px,
+);
+
+/*
+----------------------------------------
+Font Weights Map
+----------------------------------------
+  Primary font-weights.
+----------------------------------------
+*/
+
+$font-weights: ();
+$font-weight-normal: 400;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+$font-weight-bolder: 900;
+$font-weight-base: $font-weight-normal;
+

@@ -1,0 +1,70 @@
+{#
+/**
+ * @file Footer!
+ *
+ * Available variables:
+ * - footer.slogan: [string]: A handy slogan to display.
+ */
+#}
+
+<footer class="container p-3 footer" role="contentinfo">
+  <div class="row py-3">
+    <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0">
+      {% block footer_first %}
+        <h6 class="text-uppercase text-primary">Contact</h6>
+        <p><strong>TFG enterprise</strong><br>
+        Calle TFG 12<br>
+        12345 TFG<br>
+        <strong><a href="#">mail@mailadd.es</a></strong><br>
+        <strong><a href="#">660 20 30 40 56</a></strong></p>
+      {% endblock %}
+    </div>
+    <div class="col-lg-5 col-12 mb-4 mb-lg-0">
+      {% block footer_second %}
+        <h6 class="text-uppercase text-primary">Social Media</h6>
+        {% include '@molecules/nav/_nav.twig' with {
+          nav_vertical: true,
+          nav_items: [
+            {
+              nav_item_text: 'Facebook',
+            },
+            {
+              nav_item_text: 'Twitter',
+            },
+            {
+              nav_item_text: 'Linkedin',
+            },
+            {
+              nav_item_text: 'YouTube',
+            }
+          ],
+        } %}
+      {% endblock %}
+    </div>
+  </div>
+  <div class="row py-3">
+    <div class="col-lg-8 col-12">
+      {% block footer_bottom_left %}
+        {% include '@molecules/nav/_nav.twig' with {
+          nav_other_classes: [
+            'flex-column',
+            'flex-sm-row',
+          ],
+          nav_items: [
+            {
+              nav_item_text: 'Test 1',
+            },
+            {
+              nav_item_text: 'Test 2',
+            },
+          ],
+        } %}
+      {% endblock %}
+    </div>
+    <div class="col-lg-4 col-12 text-lg-right py-2 text-blue-grey">
+      {% block footer_bottom_right %}
+        @Copyright TFG 2020
+      {% endblock %}
+    </div>
+  </div>
+</footer>

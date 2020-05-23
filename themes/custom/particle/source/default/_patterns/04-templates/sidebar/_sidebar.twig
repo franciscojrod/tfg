@@ -1,0 +1,131 @@
+{#
+/**
+ * @file
+ * sidebar
+ *
+ * Available variables for sidebar:
+ *  - sidebar.has_sidebar [boolean]: Whether sidebar region and/or sidebar paragraphs exist
+ *  - sidebar.sidebar_position [text]: Position of sidebar. Possible values are "left", "right", and false.
+ *  - sidebar.invert [bool]: When set, colors will be inverted for light display on dark background.
+ */
+#}
+
+{%
+  set other_title_attributes = {
+    'class': [
+      'pt-4',
+    ]
+  }
+%}
+
+{%
+  set other_content_attributes = {
+    'class': [
+      'content',
+      has_sidebar ? 'col-md-8 col-12' : 'col-12 px-0',
+    ]
+  }
+%}
+
+{%
+  set container_classes = [
+    'sidebar',
+    has_sidebar ? 'container has-sidebar' : 'container-fluid no-sidebar',
+  ] | sort | join(' ') | trim
+%}
+
+{%
+  set row_classes = [
+    'row',
+  ] | sort | join(' ') | trim
+%}
+
+{% import '@macros/bootstrap.twig' as bootstrap %}
+
+<article {{ add_attributes(article_attributes) }}>
+  {% if has_breadcrumb %}
+    {% block breadcrumb %}
+
+      {% set breadcrumb_bootstrapped %}
+        {% include '@atoms/breadcrumb/_breadcrumb.twig' with breadcrumb %}
+      {% endset %}
+
+      {{ bootstrap.strap('container', 'row', 'col-12', breadcrumb_bootstrapped) }}
+
+    {% endblock breadcrumb %}
+  {% endif %}
+
+  {% if has_header %}
+    <div class="header-wrapper position-relative">
+      {% block header %}
+
+        {% embed '@organisms/section/_section.twig' with {
+            section_width: 'wide',
+            section_apply_width: true,
+          } %}
+            {% block content %}
+              {% include '@atoms/image/_image.twig' with header_image %}
+            {% endblock %}
+          {% endembed %}
+
+      {% endblock header %}
+    </div>
+  {% endif %}
+
+  {% if title %}
+    {{ title_prefix }}
+
+    {% set title_bootstrapped %}
+      <h1 {{ add_attributes(other_title_attributes, 'title_attributes') }}>{{ title }}</h1>
+    {% endset %}
+
+    {{ bootstrap.strap('container', 'row', 'col-12', title_bootstrapped) }}
+
+    {{ title_suffix }}
+  {% endif %}
+
+  <div class="{{ container_classes }}">
+    <div class="{{ row_classes }}">
+      {% if sidebar_position == 'left' %}
+        <aside class="col-md-4 col-12" role="complementary">
+          {% block sidebar_left %}
+            {% embed '@organisms/section/_section.twig' with {
+              section_width: 'full',
+              section_apply_width: true,
+            } %}
+              {% block content %}
+                Sidebar left content will be data from paragraphs each wrapped in a section organism. 
+              {% endblock %}
+            {% endembed %}
+          {% endblock %}
+        </aside>
+      {% endif %}
+      <div {{ add_attributes(other_content_attributes, 'content_attributes') }}>
+        {% block main %}
+          {% embed '@organisms/section/_section.twig' with {
+            section_width: 'full',
+            section_apply_width: true,
+          } %}
+            {% block content %}
+              Main content will be data from paragraphs each wrapped in a section organism. 
+            {% endblock %}
+          {% endembed %}
+        {% endblock %}
+      </div>
+      {% if sidebar_position == 'right' %}
+        <aside class="col-md-4 col-12" role="complementary">
+          {% block sidebar_right %}
+            {% embed '@organisms/section/_section.twig' with {
+              section_width: 'full',
+              section_apply_width: true,
+            } %}
+              {% block content %}
+                Sidebar right content will be data from paragraphs each wrapped in a section organism. 
+              {% endblock %}
+            {% endembed %}
+          {% endblock %}
+        </aside>
+      {% endif %}
+    </div>
+  </div>
+</article>

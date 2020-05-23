@@ -1,0 +1,24 @@
+sidebar:
+  article_attributes:
+    class: article has-sidebar
+    role: article
+  has_header: true
+  header_image:
+    image: 
+      variant: 'primary'
+      src: ''
+      alt: ''
+      style: 'carousel'
+      placeholder: true
+  title: Node title
+  other_title_attributes: pt-4
+  other_content_attributes:
+    class: content col-md-8 col-12
+  container_classes: container has-sidebar sidebar
+  row_classes: row justify-content-center
+  has_breadcrumb: false
+  has_sidebar: true
+  sidebar_position: right
+
+sidebar_demo_block:
+  title: Sidebar template

@@ -1,0 +1,78 @@
+{% embed '@atoms/grid/_grid-1-up.twig' %}
+  {% set container = true %}
+
+  {% block column_1 %}
+    <h1 class="mb-3">Buttons</h1>
+
+    <hr>
+
+    <h2>Button colors</h2>
+    <div class="mb-3">
+        {% for colorName, colorValue in buttonColors %}
+          {% include '@atoms/button/_button.twig' with {
+            button_element: 'button',
+            button_text: 'Button ' ~ colorName,
+            button_color: colorName
+          } %}
+        {% endfor %}
+    </div>
+
+    <h2>Button elements</h2>
+    <div class="mb-3">
+      {% for alternate_button in alternate_buttons %}
+        {% set buttonElement = alternate_button|merge({ button_color: 'primary', }) %}
+        {% include '@atoms/button/_button.twig' with buttonElement %}
+      {% endfor %}
+    </div>
+
+    <h2>Button size</h2>
+    <div class="mb-3">
+      {% for size in sizes %}
+        {% include '@atoms/button/_button.twig' with size %}
+      {% endfor %}
+    </div>
+
+    <h2>Button block</h2>
+    <div class="mb-3">
+      {% embed '@atoms/grid/_grid-3-up.twig' with { container: false } %}
+        {% block  column_1 %}
+          {% include '@atoms/button/_button.twig' with block_level_1 %}
+        {% endblock column_1 %}
+        {% block  column_2 %}
+          {% include '@atoms/button/_button.twig' with block_level_2 %}
+        {% endblock column_2 %}
+        {% block  column_3 %}
+          {% include '@atoms/button/_button.twig' with block_level_3 %}
+        {% endblock column_3 %}
+      {% endembed %}
+    </div>
+
+    <h2>Button state</h2>
+    <div class="mb-3">
+      {% for state in states %}
+        {% include '@atoms/button/_button.twig' with state %}
+      {% endfor %}
+    </div>
+
+    <h2>Button toggle</h2>
+    <div class="mb-3">
+      {% include '@atoms/button/_button.twig' with toggleable %}
+    </div>
+
+
+    <h2>Button with an icon</h2>
+    <div class="mb-3">
+      {% for icon_button in icon_buttons %}
+        {% include '@atoms/button/_button.twig' with icon_button %}
+      {% endfor %}
+    </div>
+
+    <h2>Button with custom icon</h2>
+    <div class="mb-3">
+      {% for icon_button in custom_icon_buttons %}
+        {% include '@atoms/button/_button.twig' with icon_button %}
+      {% endfor %}
+    </div>
+
+  {% endblock column_1 %}
+{% endembed %}

@@ -1,0 +1,14 @@
+{% embed '@atoms/grid/_grid-1-up.twig' %}
+  {% set container = true %}
+
+  {% block column_1 %}
+    <h1 class="mb-3">Accordion</h1>
+
+    <hr>
+    <div id="accordion-parent-id">
+      {% include '@organisms/accordion/_accordion.twig' with accordion_1 %}
+      {% include '@organisms/accordion/_accordion.twig' with accordion_2 %}
+      {% include '@organisms/accordion/_accordion.twig' with accordion_3 %}
+    </div>
+  {% endblock %}
+{% endembed %}

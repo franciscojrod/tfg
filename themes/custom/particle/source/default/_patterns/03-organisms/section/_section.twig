@@ -1,0 +1,87 @@
+{#
+/**
+ * @file
+ * section
+ *
+ * Available variables for section:
+ *  - section.variable_name [variable_type]: Description of the variable. Example below.
+ *  - section.invert [bool]: When set, colors will be inverted for light display on dark background.
+ */
+#}
+
+{# Re-set the section_with as a string, it comes as an object for now. #}
+{# TODO: Investigate if is better to make it be a string in a preprocess hook. #}
+{% set section_width = section_width|render %}
+
+{# Add extra top margin if there's a bg color on the section. #}
+{% set section_background_color = false %}
+{% if 'section--light' in section_attributes.class or 'section--dark' in section_attributes.class %}
+  {% set section_background_color = true %}
+{% endif %}
+
+{% set section_classes = [
+  'section',
+  section_background_color ? 'pt-6',
+  ] | merge(section_attributes.class | default([])) | remove_empty
+%}
+
+{% set section_attributes = {
+  'class': section_classes,
+} | merge(section_attributes | without('class') | default({})) | remove_empty %}
+
+{% set container_attributes = {
+  'class': [
+    section_apply_width and section_width == "full" ? 'container-fluid' : 'container',
+  ]
+} %}
+
+{% set row_attributes = {
+  'class': [
+    'row',
+    'justify-content-center',
+  ]
+} %}
+
+{% set column_attributes = {
+  'class': [
+    section_apply_width and (section_width == "wide" or not section_width) ? 'col-12',
+    section_apply_width and section_width == "full" ? 'col-12 col-xxl-9 px-lg-0',
+    section_apply_width and section_width == "narrow" ? 'col-12 col-md-8',
+    not section_apply_width ? 'col-12'
+  ]
+} %}
+
+<section {{ add_attributes(section_attributes) }}>
+  {% if section_has_title or section_has_button %}
+    <div class="container">
+      <div class="section__header">
+        {% if section_has_title %}
+          <div class="section__title">
+            {% block title %}
+              Title
+            {% endblock %}
+          </div>
+        {% endif %}
+        
+        {% if section_has_button %}
+           <div class="section__button">
+            {% block button %}
+              Button
+            {% endblock %}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  {% endif %}
+  <div class="section__content">
+    <div {{ add_attributes(container_attributes) }}>
+      <div {{ add_attributes(row_attributes) }}>
+        <div {{ add_attributes(column_attributes) }}>
+          {% block content %}
+            Section Content
+          {% endblock %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,94 @@
+// The non-printing variables, functions, and mixins of
+//   @import ~tokens/sass/non-printing/non-printing;
+// are provided to this file via:
+//   webpack.particle.js: sass-loader.data|includePaths
+
+@import '~bootstrap/scss/card';
+
+.card {
+  border: none;
+  border-radius: 0;
+
+  &__inner {
+    box-shadow: none;
+    height: 100%;
+    position: relative;
+  }
+  &__button {
+    position: absolute;
+    bottom: spacers(4);
+    left: 0;
+  }
+  &__date {
+    font-weight: $font-weight-semibold;
+    font-size: $font-size-sm;
+  }
+  a {
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}
+
+.card--hover-shadow {
+  .card__inner:hover {
+    box-shadow: 0 1px 2px 0 rgba(0,0,0,.1), 0 1px 2px 0 rgba(49,48,53,.4);
+  }
+}
+
+.card--link {
+  .card__image-wrapper {
+    overflow: hidden;
+    img {
+      transition: transform 0.7s ease;
+      transform: scale3d(1.02, 1.02, 1.02);
+    }
+  }
+  &:hover,
+  &:focus,
+  &:active {
+    cursor: pointer;
+    .card__image-wrapper img {
+      transform: scale3d(1.12, 1.12, 1.12);
+    }
+  }
+}
+
+.card--video .card__image-wrapper {
+  &::after {
+    display: block;
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    @include sprite('play', (color: theme-color('primary')));
+    height: spacers(7);
+    width: spacers(7);
+  }
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.card--full-image {
+  min-height: 480px;
+  background-position: center;
+  .card__inner {
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.75));
+    h4.card__title {
+      color: $c-white-base;
+    }
+  }
+  .card__body {
+    position: absolute;
+    bottom: 0rem;
+    .card__button {
+      position: relative;
+      bottom: unset;
+      a {
+        padding-left: 0;
+      }
+    }
+  }
+}

@@ -1,0 +1,94 @@
+{#
+/**
+ * @file
+ * cookie-compliance
+ *
+ * We are using classes and ids corresponding to the templates of drupal module eu_cookie_compliance
+ * so we have the functionality from the module working.
+ *
+ * Available variables for cookie-compliance:
+ * cookie_compliance_type: String: info|agreed|withdraw: The type of the cookie compliance popup
+ * message: String: Contains the text that will be display whithin the banner
+ * text_button_label: String: Contains Cookie policy button title which is displayed in popup-text after the message.
+ * text_button_classes: String: Contains Cookie policy button title which is displayed in popup-text after the message.
+ * primary_button_label: String: Contains the primary button label.
+ * primary_button_classes: String: Contains class names for the primary button.
+ * secondary_button_label: String: Contains the secondary button label.
+ * secondary_button_classes: String: Contains class names for the secondary button.
+ * top_button_label: String: Label for the tab that sits at the window edge.
+ * top_button_classes: String: Classes for the tab (top button) that sits at the window edge.
+ */
+#}
+{% set classes = [
+  'cookie-compliance',
+  'py-5',
+  'clearfix',
+  cookie_compliance_type == 'info' or cookie_compliance_type == 'agreed' ? 'eu-cookie-compliance-banner',
+  cookie_compliance_type == 'info' ? 'eu-cookie-compliance-banner-info',
+  cookie_compliance_type == 'agreed' ? 'eu-cookie-compliance-banner-thank-you',
+  cookie_compliance_type == 'withdraw' ? 'eu-cookie-withdraw-banner',
+] | sort | join(' ') | trim %}
+
+{% set popup_content_classes = [
+  'cookie-compliance__content',
+  'popup-content',
+  'eu-cookie-compliance-content',
+  cookie_compliance_type == 'info' or cookie_compliance_type == 'withdraw' ? 'info',
+  cookie_compliance_type == 'agreed' ? 'agreed',
+] | sort | join(' ') | trim %}
+
+{% set top_button_classes = top_button_classes ~ ' ' ~ [
+  'cookie-compliance__button--top',
+  'btn',
+  'btn-outline-primary',
+] | sort | join(' ') %}
+
+{% set text_button_classes = text_button_classes ~ ' ' ~ [
+  'cookie-compliance__button--text',
+  'btn',
+  'btn-outline-primary',
+  'd-block',
+  'mt-3',
+] | sort | join(' ') %}
+
+{% set primary_button_classes = primary_button_classes ~ ' ' ~ [
+  'cookie-compliance__button--primary',
+  'btn',
+  'btn-primary',
+  'mr-2'
+] | sort | join(' ') %}
+
+{% set secondary_button_classes = secondary_button_classes ~ ' ' ~ [
+  'cookie-compliance__button--secondary',
+  'btn',
+  'btn-primary',
+] | sort | join(' ') %}
+
+{% if top_button_label %}
+  <button type="button" class="{{ top_button_classes }}">
+    {{ top_button_label }}
+  </button>
+{% endif %}
+
+<div class="{{ classes }}">
+  <div class ="{{ popup_content_classes }}">
+    <div id="popup-text" class="cookie-compliance__message eu-cookie-compliance-message">
+      {{ message }}
+      {% if text_button_label %}
+        <button type="button" class="{{ text_button_classes }}">
+          {{ text_button_label }}
+        </button>
+      {% endif %}
+    </div>
+    <div id="popup-buttons" class="cookie-compliance__buttons eu-cookie-compliance-buttons">
+      <button type="button" class="{{ primary_button_classes }}">
+        {{ primary_button_label }}
+      </button>
+      {% if secondary_button_label %}
+        <button type="button" class="{{ secondary_button_classes }}">
+          {{ secondary_button_label }}
+        </button>
+      {% endif %}
+    </div>
+  </div>
+</div>

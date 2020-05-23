@@ -1,0 +1,141 @@
+/*
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+Color Variables
+--------------------------------------------------------------------------------
+*/
+
+$color-red: #e5322d;
+$color-red-dark: #c9100b;
+$color-pink: #f1dfe2;
+
+
+$color-midnight-blue: #010043;
+$color-dark-indigo: #0f0e68;
+$color-blue: #73EDFF;
+$color-blue-dark: #0068D0;
+$color-blue-grey: #7f7fa1;
+$color-blue-light: #dbdbe7;
+$color-grey: #f3f3f7;
+
+$color-success: #5aa076;
+$color-warning: #d7b35c;
+$color-info: #dbdbe7;
+$color-danger: #ff6f0d;
+$color-chacoral-gray: #384b53;
+$color-chacoral-light:  #384b53;
+$color-gray-darker: #757677;
+
+/* Extras */
+
+$color-drupal: #0077C0;
+$color-twitter:  #1da1f2;
+$color-grey-background: rgba(55, 75, 83, 0.05);
+/*
+----------------------------------------
+Grayscale Colors
+----------------------------------------
+  Base color values are for reference.
+  Use directly from maps in code.
+----------------------------------------
+  @see $neutral-hues
+----------------------------------------
+*/
+$c-white-base: #fff;
+$c-gray-lightest: #f0f0f0;
+$c-gray-light: #e4e4e4;
+$c-gray-base: #d5d5d5;
+$c-gray-dark: #333;
+$c-gray-darkest: #2b2b2b;
+$c-black-base: #000;
+
+/*
+----------------------------------------
+Neutral Hues
+----------------------------------------
+  The neutral hue palette offers a
+  variety of gray-scale colors.
+----------------------------------------
+*/
+$neutral-hues: (
+  'lightest-gray': $c-gray-lightest,
+  'light-gray': $c-gray-light,
+  'gray': $c-gray-base,
+  'dark-gray': $c-gray-dark,
+  'darkest-gray': $c-gray-darkest,
+);
+
+/*
+----------------------------------------
+Grayscale
+----------------------------------------
+  Override Grays
+----------------------------------------
+  @see bootstrap vars $grays map
+  @see _colors.scss
+----------------------------------------
+*/
+$white: $c-white-base;
+$gray-100: map-get($neutral-hues, 'lightest-gray');
+$gray-200: map-get($neutral-hues, 'light-gray');
+$gray-300: map-get($neutral-hues, 'gray');
+$gray-500: map-get($neutral-hues, 'dark-gray');
+$gray-800: map-get($neutral-hues, 'darkest-gray');
+$black: $c-black-base;
+
+/*
+----------------------------------------
+Primary Colors
+----------------------------------------
+  Primary color palette map
+----------------------------------------
+*/
+$primary-colors: (
+
+  'primary': $color-blue,
+  'secondary': $c-white-base,
+  'light': $color-grey,
+  'dark': $color-midnight-blue,
+
+  // Custom colors go here ...
+  'blue-grey': $color-blue-grey,
+  'indigo-dark': $color-dark-indigo,
+  'blue': $color-blue,
+  'blue-dark': $color-blue-dark,
+  'chacoral': $color-chacoral-gray,
+  'drupal': $color-drupal,
+  'twitter': $color-twitter,
+  'grey-background': $color-grey-background,
+  'chacoral-light': $color-chacoral-light,
+);
+
+$status-colors: (
+  'info': $color-info,
+  'success': $color-success,
+  'warning': $color-warning,
+  'danger': $color-danger,
+);
+
+/*
+----------------------------------------
+Color Aliases
+----------------------------------------
+Merge palette colors maps into a
+bootstrap aliased color set.
+@see $primary-colors
+@see $neutral-hues
+----------------------------------------
+*/
+$color-aliases: $primary-colors;
+
+/*
+----------------------------------------
+Colors
+----------------------------------------
+  Override Colors
+----------------------------------------
+  @see bootstrap vars $theme-colors
+  @see _colors.scss
+----------------------------------------
+*/
+$theme-colors: $color-aliases;

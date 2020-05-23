@@ -1,0 +1,31 @@
+{#
+/**
+ * @file Spacing!
+ * Documenting Spacing Examples from Bootstrap.
+ *
+ * Available variables:
+ * - scssSpacing: [array] Available in scssVariables.
+ *
+ * @see https://getbootstrap.com/docs/4.0/utilities/spacing/
+ */
+#}
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h1 class="mb-3">Spacing</h1>
+
+      <hr>
+
+      {% for spacer, value in scssSpacing %}
+        {% if spacer != 0 %}
+          <div style="margin: 10px;">
+            <div style="height: {{ value }}; width: {{ value }}; outline: solid 1px black; display: inline-block; margin-right: 5px;"></div>
+            <span>{{ value }} : <code>spacers({{ spacer }})</code></span>
+          </div>
+        {% endif %}
+      {% endfor %}
+
+    </div>
+  </div>
+</div>

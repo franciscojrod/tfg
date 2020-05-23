@@ -1,0 +1,8 @@
+.icon-preview-code {
+  opacity: 0;
+  white-space: nowrap;
+}
+.icon-preview:focus .icon-preview-code,
+.icon-preview:hover .icon-preview-code {
+  opacity: 1;
+}

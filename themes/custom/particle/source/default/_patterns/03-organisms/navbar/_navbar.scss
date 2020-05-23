@@ -1,0 +1,79 @@
+// The non-printing variables, functions, and mixins of
+//   @import ~tokens/sass/non-printing/non-printing;
+// are provided to this file via:
+//   webpack.particle.js: sass-loader.data|includePaths
+
+@import '~bootstrap/scss/navbar';
+
+.navbar {
+  flex-shrink: 0;
+  min-height: rem-calc(80px);
+  padding: 0 1rem;
+}
+
+.navbar--right {
+  justify-content: flex-end;
+}
+
+.navbar--center {
+  justify-content: center;
+}
+
+.navbar--main {
+  height: 100%;
+}
+
+// Explicitly declaring styles for navbar-toggler and navbar-toggler-icon because .navbar-light causes issues styling nav-items
+.navbar-toggler {
+  color: #010043;
+  border-color: rgba(0,0,0,.1);
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='%23010043' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+
+.nav-local-tasks {
+  left: 0;
+  bottom: 0;
+  z-index: 99999;
+  background: rgba(map-get($theme-colors, 'secondary'), 0.8);
+  box-shadow: 2px 1px 2px 0 rgba(0, 0, 0, 0.1), 0 0 3px 0 rgba(map-get($primary-colors, 'indigo-dark'), 0.4);
+  position: fixed;
+}
+
+
+.nav-tabs-container {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  z-index: 10;
+  background: $c-white-base;
+
+  .container {
+    padding: 0;
+  }
+}
+
+.nav-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  border-bottom: 0;
+
+  .nav-item {
+
+  }
+
+  .nav-link {
+    display: block;
+    padding: 0.75rem 2rem;
+    color: map-get($theme-colors, 'primary');
+    @include hover-focus() {
+      color: map-get($theme-colors, 'primary');
+    }
+  }
+}

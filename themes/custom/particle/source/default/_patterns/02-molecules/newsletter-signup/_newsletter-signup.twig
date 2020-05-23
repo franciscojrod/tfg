@@ -1,0 +1,32 @@
+{#
+/**
+ * @file
+ * newsletter-signup
+ *
+ * Available variables for newsletter-signup:
+ *  - newsletter_signup.variable_name [variable_type]: Description of the variable. Example below.
+ *  - newsletter_signup.invert [bool]: When set, colors will be inverted for light display on dark background.
+ */
+#}
+
+<div class="newsletter-signup">
+  <h6 class="text-uppercase text-primary">Newsletter</h6>
+  <div class="py-2 text-dark">{{ 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.'|t }}</div>
+  <div class="row">
+    <div class="col-sm-7 col-xl-9 pr-0">
+      {% include '@atoms/input/_input.twig' with {
+        input_type: 'text',
+        input_placeholder: 'Enter your email address',
+      } %}
+    </div>
+    <div class="col-sm-5 col-xl-3">
+      {% include '@atoms/button/_button.twig' with {
+        button_element: 'button',
+        button_color: 'danger',
+        button_text: 'Submit',
+        button_other_classes: ['mb-3'],
+        button_text: 'submit',
+      } %}
+    </div>
+  </div>
+</div>

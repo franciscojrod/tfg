@@ -1,0 +1,36 @@
+{% extends '@atoms/grid/_grid-1-up.twig' %}
+{% set container = true %}
+{% block column_1 %}
+  <div class="mt-3 mt-sm-5 mb-3">
+    <h1>Icon</h1>
+
+    {% set alert_content %}
+      <span class="d-flex align-items-center">
+        {% include '@atoms/icon/_icon.twig' with {
+          icon_name: 'info',
+          icon_other_classes: 'd-inline-block mr-2'
+        } only %}
+        <span>Hover or focus the icons to show their name/ID</span>
+      </span>
+    {% endset %}
+    {% include '@atoms/alert/_alert.twig' with {
+      type: 'info',
+      alert_primary: alert_content
+    } %}
+  </div>
+  <div class="mb-3 mt-5">
+    <div class="row">
+      {% for icon_name in icon_names %}
+        <div class="col-4 col-md-2 col-lg-1 mb-5 icon-preview" tabindex="0" aria-label="{{ icon_name }}">
+          {% include '@atoms/icon/_icon.twig' with {
+            icon_name: icon_name,
+            icon_other_classes: 'd-block'
+          } only %}
+          <div class="icon-preview-code">
+            <small><code>{{ icon_name}}</code></small>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock column_1 %}

@@ -1,0 +1,26 @@
+{#
+/**
+ * @file
+ * This is a template file for the cookie consent withdraw button.
+ *
+ * When overriding this template it is important to note that jQuery will use
+ * the following classes to assign actions to the button:
+ *
+ * eu-cookie-withdraw-button - withdraw button
+ * eu-cookie-withdraw-tab - tab that reveals the withdraw interface
+ *
+ * Variables available:
+ * - message: Contains the text that will be displayed within the banner.
+ * - withdraw_tab_button_label: Label for the tab that sits at the window edge.
+ * - withdraw_action_button_label: Label for the withdraw button.
+ */
+#}
+
+{% include "@organisms/cookie-compliance/_cookie-compliance.twig" with {
+  cookie_compliance_type: 'withdraw',
+  message: message,
+  primary_button_label: withdraw_action_button_label,
+  primary_button_classes: 'eu-cookie-withdraw-button',
+  top_button_label: withdraw_tab_button_label,
+  top_button_classes: 'eu-cookie-withdraw-tab',
+}%}

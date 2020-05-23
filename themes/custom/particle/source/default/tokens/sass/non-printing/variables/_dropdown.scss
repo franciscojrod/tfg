@@ -1,0 +1,17 @@
+/*
+--------------------------------------------------------------------------------
+Dropdown Overrides
+--------------------------------------------------------------------------------
+*/
+
+$dropdown-border-color: transparent;
+$dropdown-border-width: 0;
+$dropdown-padding-y: 1.3rem;
+$dropdown-border-radius: 0;
+$dropdown-link-color: map-get($theme-colors, 'dark');
+$dropdown-link-hover-color: map-get($theme-colors, 'primary');
+$dropdown-link-active-color: map-get($theme-colors, 'primary');
+$dropdown-link-active-bg: transparent;
+$dropdown-link-hover-bg: transparent;
+$dropdown-item-padding-y: 0.4rem;
+$dropdown-spacer: 0;

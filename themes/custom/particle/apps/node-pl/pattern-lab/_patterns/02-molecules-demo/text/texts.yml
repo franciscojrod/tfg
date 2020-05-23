@@ -1,0 +1,5 @@
+text:
+  example_var: This is an example var
+
+text_demo_block:
+  title: text Component

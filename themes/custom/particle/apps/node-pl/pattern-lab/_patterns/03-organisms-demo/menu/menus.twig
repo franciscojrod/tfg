@@ -1,0 +1,29 @@
+{% extends '@demo/_demo-block.twig' %}
+
+{% set demo = menu_demo_block %}
+
+{% block content %}
+  <div class="m-3">
+    <h2 class="mb-3">Basic Menu</h2>
+    {% include '@organisms/menu/_menu.twig' with menu_basic %}
+  </div>
+  <div class="m-3">
+    <h2 class="mb-3">Navbar Dropdown Menu</h2>
+    <div class="navbar navbar-expand-lg">
+      {% include '@organisms/menu/_menu--dropdown.twig' with menu_dropdown %}
+    </div>
+  </div>
+  <div class="m-3">
+    <h2 class="mb-3">Navbar Dropdown Menu with dropdown arrows</h2>
+    <div class="navbar navbar-expand-lg">
+      {% set menu_dropdown_arrows = menu_dropdown|merge({show_dropdown_arrows: true}) %}
+      {% include '@organisms/menu/_menu--dropdown.twig' with menu_dropdown_arrows %}
+    </div>
+  </div>
+  <div class="m-3">
+    <h2 class="mb-3">Meta Menu</h2>
+    <div class="border-bottom border-light">
+      {% include '@organisms/menu/_menu.twig' with menu_utility %}
+    </div>
+  </div>
+{% endblock %}

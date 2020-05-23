@@ -1,0 +1,57 @@
+{#
+/**
+ * @file
+ * Theme override to display a region.
+ *
+ * Available variables:
+ * - content: The content for this region, typically blocks.
+ * - attributes: HTML attributes for the region div.
+ * - region: The name of the region variable as defined in the theme's
+ *   .info.yml file.
+ *
+ * @see template_preprocess_region()
+ */
+#}
+
+{% set additional_attributes = {
+  'class': [
+    'navbar',
+    'navbar-expand-md',
+    'navbar--center',
+    'col-12',
+  ],
+  'role': 'navigation',
+  'aria-labelledby': 'block-particle-mainnavigation-menu',
+} %}
+
+{% if content %}
+  <div class="region--primary-menu border-bottom border-light">
+    <div class="container">
+      <div class="row">
+        
+          {#
+          The Primary Menu region requires our Navbar wrapper, which we've removed from
+          block--particle-mainnavigation.html.twig.
+          #}
+          {% embed '@organisms/navbar/_navbar.twig' with {
+            navbar_other_attributes: additional_attributes
+          } %}
+
+            {% block navbar_brand %}
+              {% include "@atoms/branding/_branding.twig" with {
+                url: '/',
+                logo_svg_inline: '/' ~ paths.assets ~ '/images/logo.svg',
+                site_name: 'SITE name',
+              } %}
+            {% endblock navbar_brand %}
+
+            {% block navbar_content %}
+              {{ content }}
+            {% endblock navbar_content %}
+
+          {% endembed %}
+        
+      </div>
+    </div>
+  </div>
+{% endif %}

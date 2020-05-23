@@ -1,0 +1,27 @@
+{#
+/**
+ * @file
+ * This is a template file for a banner informing a user that he has already
+ * agreed to cookies.
+ *
+ * When overriding this template it is important to note that jQuery will use
+ * the following classes to assign actions to buttons:
+ *
+ * hide-popup-button - destroy the banner
+ * find-more-button  - link to an information page
+ *
+ * Variables available:
+ * - $message:  Contains the text that will be display within the banner
+ * - $hide_button: Label for the hide button
+ * - $find_more_button: Label for the find out more button
+ */
+#}
+
+{% include "@organisms/cookie-compliance/_cookie-compliance.twig" with {
+  cookie_compliance_type: 'agreed',
+  message: message,
+  primary_button_label: hide_button,
+  primary_button_classes: 'hide-popup-button eu-cookie-compliance-hide-button',
+  secondary_button_label: find_more_button,
+  secondary_button_classes: 'find-more-button eu-cookie-compliance-more-button-thank-you',
+}%}

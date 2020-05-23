@@ -1,0 +1,14 @@
+{% embed '@atoms/grid/_grid-1-up.twig' %}
+  {% set container = true %}
+
+  {% block column_1 %}
+    <h1 class="mb-3">Article Demonstration</h1>
+
+    <hr>
+
+    {% include '@organisms/article/_article.twig' with {
+      article: article_demo
+    } %}
+
+  {% endblock %}
+{% endembed %}

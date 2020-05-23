@@ -1,0 +1,30 @@
+form_group_demo_block:
+  title: form-group Component
+
+inputs:
+  - input_type: text
+    input_label: 'This is a label'
+    input_value: 'This is a value'
+    input_description: 'This is a description'
+    input_other_attributes:
+      required: required
+  - input_type: email
+    input_placeholder: 'Insert an email address'
+  - input_type: file
+    input_label: 'This is a label'
+  - input_type: check
+    input_label: 'This is a checkbox'
+  - input_type: check
+    input_label: 'Another checkbox'
+  - input_type: radio
+    input_name: radio
+    input_label: 'Select this'
+  - input_type: radio
+    input_name: radio
+    input_label: 'Or this'
+  - input_element: 'textarea'
+    input_placeholder: 'Textarea'
+    input_label: 'A textarea'
+    input_other_attributes:
+      rows: 5
+      required: required

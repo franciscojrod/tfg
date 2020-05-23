@@ -1,0 +1,51 @@
+$button-colors: (
+  primary: (
+    color: $c-white-base,
+    bg: $color-blue,
+    border: transparent,
+    hover-color: $c-white-base,
+    hover-bg: darken($color-blue, 10),
+    hover-border: transparent
+  ),
+  secondary: (
+    color: $color-blue,
+    bg: $c-white-base,
+    border: transparent,
+    hover-color: darken($color-blue, 10),
+    hover-bg: $c-white-base,
+    hover-border: transparent
+  ),
+  pink-light: (
+    color: $c-white-base$color-blue,
+    bg: $color-blue,
+    border: transparent,
+    hover-color: $color-red,
+    hover-bg: darken($color-blue, 10),
+    hover-border: transparent
+  ),
+  blue-light: (
+    color: $color-dark-indigo,
+    bg: $color-blue-light,
+    border: transparent,
+    hover-color: $color-dark-indigo,
+    hover-bg: darken($color-blue, 10),
+    hover-border: transparent
+  )
+);
+
+$btn-border-radius: 0;
+
+$btn-font-weight: $font-weight-bolder;
+$btn-font-size: $font-size-xs;
+
+$btn-line-height: normal;
+
+$btn-padding-y: 0.5rem;
+$btn-padding-x: 1.875rem;
+
+$btn-padding-x-lg: 1.875rem;
+$btn-padding-y-lg: 0.75rem;
+$btn-font-size-lg: $btn-font-size;
+$btn-border-radius-lg: $btn-border-radius;
+$btn-line-height-lg: $btn-line-height;
+

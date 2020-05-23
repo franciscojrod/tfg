@@ -1,0 +1,16 @@
+{% embed '@atoms/grid/_grid-1-up.twig' %}
+  {% set container = true %}
+
+  {% block column_1 %}
+    <h1 class="mb-3">Carousel</h1>
+
+    <hr>
+
+    {% include '@atoms/alert/_alert.twig' with alert %}
+
+    <h2 class="my-3">Slides with Titles, Buttons, Controls, &amp; Dots </h2>
+    <p>Titles, buttons, controls, and dots are all optional.</p>
+    {% include '@molecules/carousel/_carousel.twig' with carousel_1 %}
+
+  {% endblock column_1 %}
+{% endembed %}

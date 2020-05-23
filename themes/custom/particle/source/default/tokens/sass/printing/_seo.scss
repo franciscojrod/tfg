@@ -1,0 +1,17 @@
+/*
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+SEO Styles
+--------------------------------------------------------------------------------
+These styles aid the SEO team in tracking analytics
+
+The non-printing variables, functions, and mixins of
+  @import ~tokens/sass/non-printing/non-printing;
+are provided to this file via: webpack.particle.js: sass-loader.data
+--------------------------------------------------------------------------------
+*/
+
+// Allow GTM to track outbound link clicks regardless of tag type. https://git.1xinternet.de/1xInternet/1xdx-project/issues/182
+a > * {
+  pointer-events: none;
+}

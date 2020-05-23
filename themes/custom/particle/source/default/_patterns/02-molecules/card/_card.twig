@@ -1,0 +1,91 @@
+{#
+  Card!
+
+  card_image: Object: Image to display on the card
+  card_title: String: The title on the card.
+  card_date: String: The date on the card.
+  card_text: String: The text on the card.
+  card_text_color: String: primary|secondary|succes|danger|warning|info|light|dark Text color.
+  card_info: String: Information to be shown with small font size under the title (e.g. date, file info, etc.)
+  card_button_link: Stirng: The link which is under the text on the card
+  card_button_text: Stirng: The button which is under the text on the card
+  card_other_classes: String: Other classes not specified in the template.
+  card_other_attributes: Object: Other attributes not specified in the template.
+  card_link: String: Link where the whole card should link to. If specified, the content of card is wrapped in a <a> tag.
+
+  see https://getbootstrap.com/docs/4.0/components/card/ for more details
+#}
+
+{% set card_text_color = card_text_color|default('dark')  %}
+
+{% set card_classes = [
+  'card',
+  card_view_mode ? 'card--' ~ card_view_mode,
+  card_text_color ? 'text-' ~ card_text_color,
+  card_link ? 'card--link',
+  not card_image ? 'card--text-only',
+] | merge(card_other_classes|default([])) | remove_empty %}
+
+{% set card_attributes = {
+  'class': card_classes,
+} | merge(card_other_attributes|default({})) | remove_empty %}
+
+<div {{ add_attributes(card_attributes) }}>
+  {% if card_link %}
+    <a href="{{ card_link }}" class="h-100 text-{{ card_text_color }}">
+  {% endif %}
+  <div class="card__inner"> 
+    {% if card_image is not empty %}
+      <div class="card__image">
+        <div class="position-relative card__image-wrapper">
+          {% block card_image %}
+            {% include '@atoms/image/_image.twig' with {
+              image: {
+                variant: 'primary',
+                src: card_image,
+              }
+            } %}
+          {% endblock %}
+        </div>
+      </div>
+    {% endif %}
+  
+    {% set body_class = 'card__body' %}
+    {% block card_body %}
+      <div class="{{ body_class }} px-5 pt-4 pb-6">
+        {% if card_title %}
+          {% set card_title = card_title|render|striptags|trim %}
+          {% set card_title_trimmed = card_title|length > 50 ?  card_title|slice(0, 51)|split(' ')|slice(0, -1)|join(' ') ~ '...' : card_title %}
+          <h4 class="card__title font-weight-bold">{{ card_title_trimmed|raw }}</h4>
+        {% endif %}
+        {% if card_date %}
+        <div class="card__date text-blue-grey mb-3">
+          {{ card_date }}
+        </div>
+        {% endif %}
+        {% if card_info %}
+          <div class="card__info text-blue-grey mb-2">
+            <span>{{ card_info }}</span>
+          </div>
+        {% endif %}
+        {% if card_text %}
+          <div class="card__text mb-7 text-{{ card_text_color }}">{{ card_text|raw }}</div>
+        {% endif %}
+        {% block card_button %}
+          <div class="card__button">
+            {% if card_button_text %}
+              {% include "@atoms/button/_button.twig" with {
+                button_text: card_button_text,
+                button_link: card_button_link,
+                button_element: 'a',
+              } %}
+            {% endif %}
+          </div>
+        {% endblock card_button %}
+      </div>
+    {% endblock %}
+  </div>
+  {% if card_link %}
+    </a>
+  {% endif %}
+</div>

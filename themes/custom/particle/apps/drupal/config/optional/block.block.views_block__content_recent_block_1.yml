@@ -1,0 +1,26 @@
+langcode: en
+status: false
+dependencies:
+  config:
+    - views.view.content_recent
+  module:
+    - views
+  theme:
+    - particle
+id: views_block__content_recent_block_1
+theme: 'particle'
+region: draggable_dashboard_region
+weight: null
+provider: null
+plugin: 'views_block:content_recent-block_1'
+settings:
+  id: 'views_block:content_recent-block_1'
+  label: 'Recent content'
+  provider: views
+  label_display: visible
+  views_label: 'Recent content'
+  items_per_page: none
+  override:
+    items_per_page: none
+  views_label_checkbox: 0
+visibility: {  }

@@ -1,0 +1,21 @@
+{#
+/**
+ * Macro - Bootstrap.
+ * Wraps an element in default bootstrap.
+ *
+ * container_classes: String: classes to apply to container div
+ * row_classes: String: classes to apply to row div
+ * column_classes: String: classes to apply to column div
+ * element: String: element/markup to be wrapped
+ *
+ */
+#}
+{% macro strap(container_classes = 'container', row_classes = 'row', column_classes = 'col-12', element) %}
+  <div class="{{ container_classes|clean_class }}">
+    <div class="{{ row_classes|clean_class }}">
+      <div class="{{ column_classes|clean_class }}">
+        {{ element }}
+      </div>
+    </div>  
+  </div>
+{% endmacro %}

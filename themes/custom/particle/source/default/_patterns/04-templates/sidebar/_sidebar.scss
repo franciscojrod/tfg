@@ -1,0 +1,11 @@
+// Custom styles for sidebar
+
+// The non-printing variables, functions, and mixins of 00-protons/variables
+// are provided to this file via:
+//   webpack.particle.js: sass-loader.data|includePaths
+
+.sidebar.has-sidebar {
+  .container {
+    padding: 0;
+  }
+}

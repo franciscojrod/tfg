@@ -1,0 +1,38 @@
+{% extends '@demo/_demo-block.twig' %}
+
+{% set demo = input_demo_block %}
+
+{% block content %}
+  <div class="bg-light mb-3 py-2 px-4 border rounded">
+    {% for input in inputs %}
+      {% set input = input|merge({ input_id: 'input-' ~ loop.index }) %}
+      {% include '@atoms/input/_input.twig' with input|merge ({
+        input_description: 'Input description',
+      }) %}
+      {% set input = input|merge({ input_id: 'input-' ~ loop.index ~ '-valid' }) %}
+      {% include '@atoms/input/_input.twig' with input|merge({
+        input_other_classes: ['is-valid'],
+        input_description: 'Input is valid',
+        input_description_type: 'valid',
+      }) %}
+      {% set input = input|merge({ input_id: 'input-' ~ loop.index ~ '-invalid' }) %}
+      {% include '@atoms/input/_input.twig' with input|merge({
+        input_other_classes: ['is-invalid'],
+        input_description: 'Input is invalid',
+        input_description_type: 'invalid',
+      }) %}
+    {% endfor %}
+  </div>
+
+  <div class="py-2 px-4 border rounded">
+    {% for input in inputs %}
+      {% set input = input|merge({ input_id: 'input-inverse-' ~ loop.index }) %}
+      <div class="my-4">
+        {% include '@atoms/input/_input.twig' with input|merge({
+          input_other_classes: ['input-inverse'],
+          input_wrapper_classes: ['input-inverse'],
+        }) %}
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}

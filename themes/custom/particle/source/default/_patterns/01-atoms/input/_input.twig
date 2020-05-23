@@ -1,0 +1,109 @@
+{#
+  Input!
+
+  input_element: String: input|select|textarea defines the element type for your input.
+  input_type: String: the html 'type' attribute, e.g. text, email, password, file, number, url, etc.
+
+  input_label: The html 'label' element to be displayed or the input.
+  input_placeholder: String: The input's html 'placeholder' attribute
+  input_description: The description/help text rendered below the input.
+  input_description_type: undefined|valid|invalid
+
+  input_id: String: The input's html 'id' attribute.
+  input_value: String: The input's html 'value' attribute.
+  input_disabled: Boolean: True|False set input to appear disabled.
+  input_other_classes: Other classes not specified in the template.
+  input_other_attributes: Other attributes not specified in the template.
+
+  input_wrapper_classes: Classes for the input wrapper, used when input type is file or check.
+  input_wrapper_other_attributes: Other attributes for input (only file or check types).
+
+  input_name: String: The check's html 'name' attribute. Used for radio buttons.
+  input_checked: Boolean: True|False set check to appear checked.
+
+  input_options: an array of texts and values. Used for selects.
+
+  See https://getbootstrap.com/docs/4.0/components/forms/ for more details.
+#}
+{% set input_element = input_element | default('input') %}
+{% if input_element == 'input' %}
+  {% set input_type = input_type|default(attributes.type)|default('text') %}
+{% endif %}
+
+{% if input_type == 'check' %}
+  {% set input_type = 'checkbox' %}
+{% endif %}
+
+{% set input_classes = [
+  input_type == 'file' ? 'custom-file-input',
+  input_type == 'checkbox' or input_type == 'radio' ? 'custom-control-input',
+  input_type not in ['file', 'checkbox', 'radio'] ? 'form-control',
+  input_element == 'select' ? 'custom-select',
+] | merge(input_other_classes|default([])) | remove_empty %}
+
+{% set input_attributes = {
+  'type': input_other_attributes.type ? input_other_attributes.type : (input_element != 'textarea' ? input_type),
+  'value': input_other_attributes.value ? input_other_attributes.value : (input_element != 'textarea' ? input_value),
+  'id': input_other_attributes.id ? input_other_attributes.id : input_id,
+  'name': input_name,
+  'placeholder': input_other_attributes.placeholder ? input_other_attributes.placeholder : input_placeholder,
+  'disabled': input_other_attributes.disabled ? input_other_attributes.disabled : input_disabled,
+  'class': input_classes,
+} | merge(input_other_attributes|default({})) | remove_empty %}
+
+{% set input_attributes = input_attributes | merge({'tabindex': '0'}) %}
+
+{% block content %}
+
+  {# 
+    File input.
+  #}
+  {% if input_type == 'file' %}
+    {% set input_wrapper_classes = [
+      'custom-file'
+    ] | merge(input_wrapper_classes|default([])) | remove_empty %}
+    {% set input_wrapper_attributes = {
+      'class': input_wrapper_classes,
+    } | merge(input_wrapper_other_attributes|default({})) | remove_empty %}
+    <div {{ add_attributes(input_wrapper_attributes) }}>
+      <{{ input_element }} {{ add_attributes(input_attributes) }}>
+      <label class="custom-file-label" for="{{ input_attributes.id }}">{{ 'Choose file'|t }}</label>
+    </div>
+  
+  {# 
+    Checkbox and radio input.
+  #}
+  {% elseif input_type == 'checkbox' or input_type == 'radio' %}
+    <div class="custom-control {{'custom-' ~ input_attributes.type }}">
+      <{{ input_element }} {{ add_attributes(input_attributes) }}>
+      <label class="custom-control-label" for="{{ input_attributes.id }}">{{ input_label|raw }}</label>
+    </div>
+
+  {#
+    Select.  
+  #}
+  {% elseif input_element == 'select' %}
+      {% set input_classes = [
+        'custom-select',
+      ] | merge(input_classes|default([])) | remove_empty %}
+      <{{ input_element }} {{ add_attributes(input_attributes) }}>
+        {% for select_option in input_options %}
+          {% set selected = select_option.option_value == input_attributes.value ? 'selected': '' %}
+          <option value="{{ select_option.option_value }}" {{ selected }}>{{ select_option.option_text }}</option>
+        {% endfor %}
+      </{{ input_element }}>
+
+  {# 
+    Textarea.
+  #}
+  {% elseif input_element == 'textarea' %}
+    <{{ input_element }} {{ add_attributes(input_attributes) }}>{{ input_value }}</{{ input_element }}>
+
+  {#
+    Everything else
+  #}
+  {% else %}
+    <{{ input_element }} {{ add_attributes(input_attributes) }}>
+  {% endif %}
+
+{% endblock %}

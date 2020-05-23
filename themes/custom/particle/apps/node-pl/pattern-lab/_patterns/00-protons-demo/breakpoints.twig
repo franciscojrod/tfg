@@ -1,0 +1,39 @@
+{#
+/**
+ * @file Breakpoints!
+ * Documenting Breakpoints.
+ *
+ * Available variables:
+ * - scssBreakpoints.bp: [array] Breakpoints.
+ *
+ * @see https://getbootstrap.com/docs/4.0/layout/overview/
+ */
+#}
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h1 class="mb-3">Breakpoints</h1>
+
+      <hr>
+    </div>
+  </div>
+</div>
+
+<div class="sg-breakpoints">
+  <ul class="breakpoints">
+    {% for bp, value in scssBreakpoints %}
+      <li style="left: {{ value }}">
+        <span class="label">{{ bp }}:<br/>{{ value }}</span>
+      </li>
+    {% endfor %}
+  </ul>
+  <ul class="device_widths">
+    {% for device in device_widths %}
+      <li style="width: {{ device.width }}px;">
+        <span class="label">{{ device.name }}: {{ device.width }}px</span>
+      </li>
+    {% endfor %}
+  </ul>
+</div>
+

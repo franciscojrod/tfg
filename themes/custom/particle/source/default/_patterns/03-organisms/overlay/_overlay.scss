@@ -1,0 +1,25 @@
+// Custom styles for overlay
+
+// The non-printing variables, functions, and mixins of 00-protons/variables
+// are provided to this file via:
+//   webpack.particle.js: sass-loader.data|includePaths
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background-color: map-get($theme-colors, 'secondary');
+  box-shadow: 0px 0px 32px 0px rgba(map-get($theme-colors, 'dark'), 0.5);
+  min-height: rem-calc(100px);
+}
+
+.overlay-toggle {
+  color: $color-blue-grey;
+  text-decoration: none;
+  &:hover {
+    color: map-get($theme-colors, 'primary');
+    text-decoration: none;
+  }
+}

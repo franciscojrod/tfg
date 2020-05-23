@@ -1,0 +1,25 @@
+@mixin button-variant-custom($button-color) {
+  color: map-get($button-color, 'color');
+  background: map-get($button-color, 'bg');
+  border-color: map-get($button-color, 'border');
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: map-get($button-color, 'hover-color');
+    background: map-get($button-color, 'hover-bg');
+    border-color: map-get($button-color, 'hover-border');
+  }
+
+  &:not(:disabled):not(.disabled):active {
+    color: map-get($button-color, 'hover-color');
+    background: map-get($button-color, 'hover-bg');
+    border-color: map-get($button-color, 'hover-border');
+  }
+
+  &:disabled {
+    color: lighten(map-get($button-color, 'hover-color'), 10);
+    background-color: lighten(map-get($button-color, 'hover-bg'), 10);
+    border-color: lighten(map-get($button-color, 'hover-border'), 10);
+  }
+}

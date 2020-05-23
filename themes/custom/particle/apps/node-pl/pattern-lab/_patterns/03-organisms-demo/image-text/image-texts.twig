@@ -1,0 +1,14 @@
+{% extends '@demo/_demo-block.twig' %}
+
+{% set demo = image_text_demo_block %}
+
+{% block content %}
+  <h1>Image / text Demonstration</h1>
+  <div class="mb-4">
+
+    {% include '@organisms/image-text/_image-text.twig' with section_1 %}
+  </div>
+  <div class="mb-4">
+    {% include '@organisms/image-text/_image-text.twig' with section_2 %}
+  </div>
+{% endblock %}

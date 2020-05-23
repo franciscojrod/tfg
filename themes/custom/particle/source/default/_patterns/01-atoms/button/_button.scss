@@ -1,0 +1,90 @@
+// The non-printing variables, functions, and mixins of:
+//   @import ~tokens/sass/non-printing/non-printing;
+// are provided to this file via:
+//   webpack.particle.js: sass-loader.data|includePaths
+//
+// NOTE: We are not using bootstrap buttons css any more, as most of the cases
+// we have quite different styles for buttons and is more effective than
+// overriding all the time. Also, we have our own colors variable and mixin
+// to create the button variants.
+
+// We are not importing the buttons styles as we are writing our own styles.
+//@import '~bootstrap/scss/buttons';
+
+@import '~bootstrap/scss/button-group';
+@import '~bootstrap/scss/mixins/buttons';
+
+.btn {
+  display: inline-block;
+  text-transform: uppercase;
+  letter-spacing: 0.09375rem;
+  font-family: $headings-font-family;
+  font-weight: $btn-font-weight;
+  text-align: center;
+  min-width: 2.4375rem;
+  vertical-align: middle;
+  user-select: none;
+  border: $btn-border-width solid transparent;
+  @include button-size($btn-padding-y, $btn-padding-x, $btn-font-size, $btn-line-height, $btn-border-radius);
+  &.disabled,
+  &:disabled {
+    opacity: $btn-disabled-opacity;
+  }
+  .icon {
+    font-size: inherit;
+    vertical-align: middle;
+  }
+  .svg svg {
+    width: 0.8rem;
+    height: 0.8rem;
+  }
+  .icon,
+  .svg {
+    padding-right: 0.3rem;
+  }
+}
+
+@each $color, $value in $button-colors {
+  .btn-#{$color} {
+    @include button-variant-custom($value);
+  }
+}
+
+//
+// Button Sizes
+//
+
+.btn-lg {
+  @include button-size($btn-padding-y-lg, $btn-padding-x-lg, $btn-font-size-lg, $btn-line-height-lg, $btn-border-radius-lg);
+}
+
+// Override bootstrap since links which are type button break in Chrome (maybe others also)
+
+a[type="button"] {
+  appearance: none;
+}
+
+//
+// Block button
+//
+
+.btn-block {
+  display: block;
+  width: 100%;
+
+  // Vertically space out multiple block buttons
+  + .btn-block {
+    margin-top: $btn-block-spacing-y;
+  }
+}
+
+// Specificity overrides
+input[type="submit"],
+input[type="reset"],
+input[type="button"] {
+  &.btn-block {
+    width: 100%;
+  }
+}
+
+

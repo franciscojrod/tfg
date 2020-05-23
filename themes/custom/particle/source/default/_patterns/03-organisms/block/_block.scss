@@ -1,0 +1,20 @@
+// Custom styles for block
+
+// The non-printing variables, functions, and mixins of 00-protons/variables
+// are provided to this file via:
+//   webpack.particle.js: sass-loader.data|includePaths
+
+.block--id-toc-js-block {
+  li {
+    color: map-get($theme-colors, primary);
+  }
+  .toc-h3 {
+    margin-left: map-get($spacers, 3);
+  }
+  .toc-h4 {
+    margin-left: map-get($spacers, 5);
+  }
+  .toc-h5 {
+    margin-left: map-get($spacers, 8);
+  }
+}

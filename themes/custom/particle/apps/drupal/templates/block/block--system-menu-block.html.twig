@@ -1,0 +1,48 @@
+{{ attach_library('particle/nav') }}
+{{ attach_library('particle/dropdown') }}
+
+{#
+/**
+ * @file
+ * Theme override for a menu block.
+ *
+ * Available variables:
+ * - plugin_id: The ID of the block implementation.
+ * - label: The configured label of the block if visible.
+ * - configuration: A list of the block's configuration values.
+ *   - label: The configured label for the block.
+ *   - label_display: The display settings for the label.
+ *   - provider: The module or other provider that provided this block plugin.
+ *   - Block plugin specific settings will also be stored here.
+ * - content: The content of this block.
+ * - attributes: HTML attributes for the containing element.
+ *   - id: A valid HTML ID and guaranteed unique.
+ * - title_attributes: HTML attributes for the title element.
+ * - content_attributes: HTML attributes for the content element.
+ * - title_prefix: Additional output populated by modules, intended to be
+ *   displayed in front of the main title tag that appears in the template.
+ * - title_suffix: Additional output populated by modules, intended to be
+ *   displayed after the main title tag that appears in the template.
+ *
+ * Headings are only shown when the menu block's label is configured to be
+ * displayed. We don't want to always have it in DOM as it is not optimal for
+ * SEO. For screen-readers and assistive technology we use
+ * role="navigation" and aria-label. See more information here:
+ * https://www.w3.org/WAI/tutorials/page-structure/labels/#using-aria-label
+ */
+#}
+{% set heading_id = attributes.id ~ '-menu'|clean_id %}
+
+<nav role="navigation" aria-label="{{ configuration.label }}" {{ attributes|without('role', 'aria-labelledby') }}>
+  {# Label. If not displayed, we used to provide it for screen readers. Not anymore as per current WCAG guidelines. #}
+  {% if configuration.label_display %}
+    {{ title_prefix }}
+    <h2{{ title_attributes.setAttribute('id', heading_id) }}>{{ configuration.label }}</h2>
+    {{ title_suffix }}
+  {% endif %}
+
+  {# Menu. #}
+  {% block content %}
+    {{ content }}
+  {% endblock %}
+</nav>

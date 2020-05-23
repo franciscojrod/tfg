@@ -1,0 +1,8 @@
+
+@function theme-color-level-second($color-name: "info", $level: 0) {
+  $color: map-get($status-colors, $color-name);
+  $color-base: if($level > 0, $black, $white);
+  $level: abs($level);
+
+  @return mix($color-base, $color, $level * $theme-color-interval);
+}

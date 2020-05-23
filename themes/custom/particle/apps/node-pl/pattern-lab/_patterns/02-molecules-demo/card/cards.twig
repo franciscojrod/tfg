@@ -1,0 +1,181 @@
+<div class="bg-light">
+{% embed '@atoms/grid/_grid-1-up.twig' %}
+
+  {% set container = true %}
+
+  {% block column_1 %}
+    <h1 class="mb-3">Cards</h1>
+    <div class="mb-3 p-3 bg-secondary border border-secondary rounded">
+      <p class="lead">{{ helper_card_main }}</p>
+      <div><a href="https://getbootstrap.com/docs/4.0/components/card/" target="_blank" rel="noopener noreferrer">Bootstrap Documentation</a></div>
+    </div>
+
+    <div class="mt-3 mt-sm-5">
+      <h3>Teaser with an image or video, title, text and button</h3>
+      <p>Variables:
+        <code>card_title, card_text, card_image, card_button_text, card_button_link, card_video</code><br/>
+      </p>
+    </div>
+    <div class="mb-3">
+      {% set card_1 %}
+        {% include '@molecules/card/_card.twig' with image_card_1 %}
+      {% endset %}
+
+      {% set card_2 %}
+        {% include '@molecules/card/_card.twig' with video_card_2 %}
+      {% endset %}
+
+      {% set card_3 %}
+        {% include '@molecules/card/_card.twig' with text_card_3 %}
+      {% endset %}
+
+      {% include '@templates/grid/_grid.twig' with {
+        grid_items: [
+          card_1,
+          card_2,
+          card_3
+        ]
+      } %}
+    </div>
+    <div class="mt-3 mt-sm-5">
+      <h3>Teaser with an image, title, text, button, date and card link</h3>
+      <p>Variables:
+        <code>card_title, card_text, card_image, card_date, card_button_text, card_button_link, card_link</code><br/>
+      </p>
+    </div>
+    <div class="mb-3">
+      {% set card_1 %}
+        {% include '@molecules/card/_card.twig' with text_date_card_4 %}
+      {% endset %}
+
+      {% set card_2 %}
+        {% include '@molecules/card/_card.twig' with image_date_card_5 %}
+      {% endset %}
+
+      {% set card_3 %}
+        {% include '@molecules/card/_card.twig' with image_date_card_5 %}
+      {% endset %}
+
+      {% include '@templates/grid/_grid.twig' with {
+        grid_items: [
+          card_1,
+          card_2,
+          card_3
+        ]
+      } %}
+    </div>
+    <div class="mt-3 mt-sm-5">
+      <h3>Contact teaser with an image, title, text</h3>
+      <p>Variables:
+        <code>card_title, card_text, card_image </code><br/>
+      </p>
+    </div>
+    <div class="mb-3">
+      {% set card_1 %}
+        {% include '@molecules/card/_card.twig' with contact_card_short_6 %}
+      {% endset %}
+
+      {% set card_2 %}
+        {% include '@molecules/card/_card.twig' with contact_card_long_7 %}
+      {% endset %}
+
+      {% set card_3 %}
+        {% include '@molecules/card/_card.twig' with contact_card_long_7 %}
+      {% endset %}
+
+      {% include '@templates/grid/_grid.twig' with {
+        grid_items: [
+          card_1,
+          card_2,
+          card_3
+        ]
+      } %}
+    </div>
+
+    <div class="mt-3 mt-sm-5">
+      <h3>Download teaser with an image, title, button, files</h3>
+      <p>Variables:
+        <code>card_title, card_image, card_button_text, card_button_link  </code><br/>
+      </p>
+    </div>
+    <div class="mb-3">
+      {% set card_1 %}
+        {% include '@molecules/card/_card.twig' with download_card_8 %}
+      {% endset %}
+
+      {% set card_2 %}
+        {% include '@molecules/card/_card.twig' with download_card_8 %}
+      {% endset %}
+
+      {% set card_3 %}
+        {% include '@molecules/card/_card.twig' with download_card_8 %}
+      {% endset %}
+
+      {% include '@templates/grid/_grid.twig' with {
+        grid_items: [
+          card_1,
+          card_2,
+          card_3
+        ]
+      } %}
+    </div>
+    <div class="mt-3 mt-sm-5">
+      <h3>Full image teaser with an full image, title, button</h3>
+      <p>Variables:
+        <code>card_title, card_other_attributes, card_button_text, card_button_link </code><br/>
+      </p>
+    </div>
+    <div class="mb-3">
+      {% set card_1 %}
+        {% include '@molecules/card/_card.twig' with full_image_card_9 %}
+      {% endset %}
+
+      {% set card_2 %}
+        {% include '@molecules/card/_card.twig' with full_image_card_9 %}
+      {% endset %}
+
+      {% set card_3 %}
+        {% include '@molecules/card/_card.twig' with full_image_card_9 %}
+      {% endset %}
+
+      {% include '@templates/grid/_grid.twig' with {
+        grid_items: [
+          card_1,
+          card_2,
+          card_3
+        ]
+      } %}
+    </div>
+    <hr>
+
+    <h2>Grid 3</h2>
+    <div class="mb-3 p-3 bg-secondary border border-secondary rounded">
+      <p>{{ helper_card_text }}</p>
+    </div>
+    <div class="mb-3">
+
+      {% set card_1 %}
+        {% include '@molecules/card/_card.twig' with image_card_1 %}
+      {% endset %}
+
+      {% set card_2 %}
+        {% include '@molecules/card/_card.twig' with video_card_2 %}
+      {% endset %}
+
+      {% set card_3 %}
+        {% include '@molecules/card/_card.twig' with video_card_2 %}
+      {% endset %}
+
+      {% include '@templates/grid/_grid.twig' with {
+        grid_items: [
+          card_1,
+          card_2,
+          card_3
+        ]
+      } %}
+    </div>
+    <hr>
+
+  {% endblock column_1 %}
+{% endembed %}
+</div>

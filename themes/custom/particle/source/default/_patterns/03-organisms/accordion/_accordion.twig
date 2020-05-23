@@ -1,0 +1,41 @@
+{#
+  Accordion item!
+
+  accordion_parent_id: Integer: A unique numerical ID for the accordion.
+  accordion_expanded: String: The default collapse state on the card.
+  accordion_header: String: The text to be displayed in the header of the accordion item.
+  accordion_text: String: The text to be displayed in the body of the accordion item.
+  accordion_index: Integer: a unique ID for the accordion item
+  accordion_other_classes: String: Other classes not specified in the template.
+  accordion_other_attributes: Object: Other attributes not specified in the template.
+
+
+  Accordions use Bootstrap's Collapse. See below for more details:
+
+  * https://getbootstrap.com/docs/4.0/components/collapse/
+#}
+{% set accordion_classes = [
+  'accordion',
+  'border-bottom',
+] | merge(accordion_other_classes|default([])) | remove_empty %}
+
+{% set accordion_attributes = {
+  'class': accordion_classes,
+ } | merge(accordion_other_attributes|default({})) | remove_empty %}
+
+ <div {{ add_attributes(accordion_attributes) }}>
+  <h3 class="accordion__header px-0 py-0 mb-0" id="{{ 'heading-' ~ accordion_index }}">
+    <span class="accordion__expander-button w-100 d-flex justify-content-between align-items-center p-3 {{ accordion_expanded.header_class }}" data-toggle="collapse" data-target="{{ '#collapse-' ~ accordion_index }}" aria-expanded="{{ accordion_expanded.aria }}" aria-controls="{{ 'collapse-' ~ accordion_index }}">
+      <span class="d-block pt-1">{{ accordion_header }}</span>
+      <span class="icon icon--add text-primary show-collapsed" data-toggle="collapse" data-target="{{ '#collapse-' ~ accordion_index }}" ></span>
+      <span class="icon icon--remove text-primary hide-collapsed" data-toggle="collapse" data-target="{{ '#collapse-' ~ accordion_index }}" ></span>
+
+    </span>
+  </h3>
+
+  <div id="{{ 'collapse-' ~ accordion_index }}" class="collapse {{ accordion_expanded.show }} accordion__body" aria-labelledby="{{ 'heading-' ~ accordion_index }}" data-parent="{{ '#accordion-' ~ accordion_parent_id }}">
+    <div class="px-3 py-4">
+      {{ accordion_text }}
+    </div>
+  </div>
+</div>

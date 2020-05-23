@@ -1,0 +1,25 @@
+// Custom styles for branding
+
+// The non-printing variables, functions, and mixins of 00-protons/variables
+// are provided to this file via:
+//   webpack.particle.js: sass-loader.data|includePaths
+
+.branding__site-logo svg,
+.branding__site-logo img {
+  max-width: 10em;
+  color: map-get($theme-colors, 'primary');
+}
+
+.branding__site-name {
+  font-weight: $font-weight-bold;
+}
+
+.branding__site-name,
+.branding__site-slogan {
+  max-width: 15em;
+  color: map-get($theme-colors, primary);
+}
+
+.branding a:hover {
+  text-decoration: none;
+}

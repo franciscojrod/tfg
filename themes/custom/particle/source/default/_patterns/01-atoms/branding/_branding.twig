@@ -1,0 +1,43 @@
+{#
+/**
+ * Block - Branding.
+ *
+ * url: String: the url the block directs to.
+ * logo_svg_inline: String: The SVG path.
+ * logo_img_src: String: The IMG path.
+ * site_name: String: the site name provided by the app.
+ * site_slogan: String: the site slogan provided by the app.
+ * branding_other_classes: String: Other classes not specified in the template.
+ * branding_other_attributes: Object: Other attributes not specified in the template.
+ *
+ */
+#}
+{% set branding_classes = [
+  'branding',
+  branding_other_classes,
+] %}
+
+<aside>
+  <a href="{{ url }}" title="{{ site_name }}" rel="home">
+    {% if logo_svg_inline or logo_img_src %}
+      <div class="branding__site-logo">
+        {% if logo_svg_inline %}
+          {% include '@atoms/image/_image.twig' with {
+            image: {
+              variant: 'svg',
+              src: logo_svg_inline,
+            }
+          } %}
+        {% elseif logo_img_src %}
+          {% include "@atoms/image/_image.twig" with {
+            image: {
+              variant: 'primary',
+              src: logo_img_src,
+              alt: site_name ~ ' site logo',
+            }
+          } %}
+        {% endif %}
+      </div>
+    {% endif %}
+  </a>
+</aside>

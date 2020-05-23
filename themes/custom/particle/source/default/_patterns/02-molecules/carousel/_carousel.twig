@@ -1,0 +1,48 @@
+{#
+  Carousel
+
+  carousel_id: Integer: The ID of the Carousel.
+  carousel_controls: Boolean: Adds controls for the Carousel.
+  carousel_caption: Boolean: Adds the Image Caption in the Carousel Images Array.
+  carousel_indicators: Array: The Indicators and Associated Data.
+  carousel_images: Array: The Images and Associated Data.
+
+  see https://getbootstrap.com/docs/4.0/components/carousel/ for more details
+#}
+{% set carousel_id = random() %}
+
+<div id="{{ 'carousel-' ~ carousel_id }}" class="carousel position-relative">
+  <div class="carousel__slides">
+    {% block slides %}
+      {# for loop is purely to demo in PL, Drupal is passing in similar directly into the block #}
+      {% for slide in carousel_slides %}
+
+        {% set slide_image %}
+          {% include "@atoms/image/_image.twig" with {
+            image: {
+              variant: 'primary',
+              src: slide.slide_image,
+              alt: slide.slide_text,
+            }
+          } %}
+        {% endset %}
+        {% include '@molecules/carousel/_carousel-slide.twig' with {
+          slide_image: slide_image,
+          slide_text: slide.slide_text,
+          slide_link_text: slide.slide_link_text,
+          slide_link_url: slide.slide_link_url,
+        } %}
+      {% endfor %}
+    {% endblock slides %}
+  </div>
+  <div class="carousel__dots col-md-10 offset-md-1"></div>
+  {% include '@atoms/icon/_icon.twig' with {
+    icon_name: 'chevron_left',
+    icon_other_classes: 'carousel__prev'
+  } %}
+  {% include '@atoms/icon/_icon.twig' with {
+    icon_name: 'chevron_right',
+    icon_other_classes: 'carousel__next'
+  } %}
+</div>
+

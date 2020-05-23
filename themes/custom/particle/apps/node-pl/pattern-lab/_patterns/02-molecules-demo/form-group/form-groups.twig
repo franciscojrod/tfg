@@ -1,0 +1,12 @@
+{% extends '@demo/_demo-block.twig' %}
+
+{% set demo = form_group_demo_block %}
+
+{% block content %}
+  <div class="bg-light mb-3 py-2 px-4 border rounded">
+    {% for input in inputs %}
+      {% set input = input|merge({ input_id: 'input-' ~ loop.index }) %}
+      {% include '@atoms/input/_input.twig' with input %}
+    {% endfor %}
+  </div>
+{% endblock %}

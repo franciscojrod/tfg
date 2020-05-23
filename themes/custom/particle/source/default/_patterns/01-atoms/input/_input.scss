@@ -1,0 +1,36 @@
+// Custom styles for input
+
+// The non-printing variables, functions, and mixins of 00-protons/variables
+// are provided to this file via:
+//   webpack.particle.js: sass-loader.data|includePaths
+
+@import '~bootstrap/scss/forms';
+@import '~bootstrap/scss/input-group';
+
+.input-inverse:not(.custom-control) {
+  &,
+  &:focus,
+  &.custom-file label {
+    background-color: theme-colors('light');
+  }
+}
+
+// Over effect in the 'Browse' button of the custom file. We don't use button-variant-custom()
+// because we have to override the styles from the .custom-file as 'hover' trigger.
+.custom-file {
+  $the_custom-file-button-color: map-get($button-colors, 'blue-light');
+  .custom-file-label {
+    &:after {
+      color: map-get($the_custom-file-button-color, 'color');
+      background: map-get($the_custom-file-button-color, 'bg');
+    }
+  }
+  &:hover {
+    .custom-file-label {
+      &:after {
+        color: map-get($the_custom-file-button-color, 'hover-color');
+        background: map-get($the_custom-file-button-color, 'hover-bg');
+      }
+    }
+  }
+}

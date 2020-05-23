@@ -1,0 +1,67 @@
+// The non-printing variables, functions, and mixins of
+//   @import ~tokens/sass/non-printing/non-printing;
+// are provided to this file via:
+//   webpack.particle.js: sass-loader.data|includePaths
+
+@import '~slick-carousel/slick/slick.css';
+@import '~slick-carousel/slick/slick-theme.css';
+
+.carousel {
+  &__dots {
+    bottom: map-get($spacers, 4);
+    list-style-type: none;
+    position: absolute;
+    text-align: left;
+    width: 100%;
+    .slick-dots {
+      bottom: 0;
+      width: auto;
+    }
+    li button:before {
+      color: map-get($primary-colors, 'secondary');
+      font-size: $font-size-base;
+      opacity: 1;
+    }
+    li.slick-active button:before {
+      color: map-get($primary-colors, 'primary');
+      opacity: 1;
+    }
+  }
+
+  .carousel__prev,
+  .carousel__next {
+    align-items: center;
+    color: map-get($primary-colors, 'secondary');
+    cursor: pointer;
+    display: flex;
+    font-size: 48px; // TODO Set this correctly (not px?)
+    height: 5rem;
+    justify-content: center;
+    left: 0;;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 5rem;
+    z-index: 1;
+    &:before {
+      font-size: 5rem;
+    }
+  }
+
+  .carousel__next {
+    left: auto;
+    right: 0;
+  }
+}
+
+.carousel-slide {
+  &__title {
+    color: map-get($primary-colors, 'secondary');
+  }
+  &__caption {
+    bottom: 0;
+  }
+  &__caption-inner {
+    color: map-get($primary-colors, 'secondary');
+  }
+}

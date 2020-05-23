@@ -1,0 +1,7 @@
+breadcrumb:
+  - text: 'Home'
+    url: '/home'
+  - text: 'News'
+    url: '#'
+  - text: 'News Article Title'
+    url: '#'

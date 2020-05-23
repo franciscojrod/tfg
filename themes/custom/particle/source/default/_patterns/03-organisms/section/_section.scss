@@ -1,0 +1,28 @@
+// Custom styles for section
+
+// The non-printing variables, functions, and mixins of 00-protons/variables
+// are provided to this file via:
+//   webpack.particle.js: sass-loader.data|includePaths
+
+.section + .section {
+  margin-top: spacers(6);
+}
+
+.section--light {
+  background-color: theme-colors(light);
+}
+
+.section--dark {
+  background-color: theme-colors(dark);
+
+  .section__title h2 {
+    color: theme-colors(secondary);
+    margin: 0;
+  }
+}
+
+.section__header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: spacers(3);
+}

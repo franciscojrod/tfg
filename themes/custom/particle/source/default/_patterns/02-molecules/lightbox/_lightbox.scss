@@ -1,0 +1,30 @@
+// The non-printing variables, functions, and mixins of
+//   @import ~tokens/sass/non-printing/non-printing;
+// are provided to this file via:
+//   webpack.particle.js: sass-loader.data|includePaths
+
+.lightbox__prev,
+.lightbox__next {
+  align-items: center;
+  color: map-get($primary-colors, 'secondary');
+  // stylelint-disable-next-line
+  display: flex !important; // TOTO find a better way to override
+  // stylelint-disable-next-line
+  font-size: 48px !important; // TODO Set this correctly (not px?)
+  height: 5rem;
+  justify-content: center;
+  left: 0;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 5rem;
+  z-index: 1;
+  &:before {
+    font-size: 5rem;
+  }
+}
+
+.lightbox__next {
+  left: auto;
+  right: 0;
+}

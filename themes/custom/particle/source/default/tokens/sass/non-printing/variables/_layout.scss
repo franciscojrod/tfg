@@ -1,0 +1,37 @@
+/*
+--------------------------------------------------------------------------------
+Layout Overrides
+--------------------------------------------------------------------------------
+  Update Layout Values
+    These start as the same values as Bootstrap's default.
+    Placing here to make customization simple.
+--------------------------------------------------------------------------------
+  @see bootstrap vars $grid-breakpoints
+  @see bootstrap vars $container-max-widths
+--------------------------------------------------------------------------------
+*/
+
+// Grid breakpoints
+//
+// Define the minimum dimensions at which your layout will change,
+// adapting to different screen sizes, for use in media queries.
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1240px
+) !default;
+
+
+// Grid containers
+//
+// Define the maximum width of `.container` for different screen sizes.
+
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1180px
+) !default;

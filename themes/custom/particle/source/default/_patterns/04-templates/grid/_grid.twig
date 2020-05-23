@@ -1,0 +1,60 @@
+{#
+/**
+ * @file Grid!
+ * Implements a grid of items using Bootstrap layout.
+ *
+ * Available variables:
+ * - grid_numcols: [string]: Number of columns at desktop, accepted values are 1-4, defaults to 1 if missing.
+ * - grid_items: [array]: A collection of items to display.
+ */
+#}
+
+ {# All grids are single column at mobile #}
+{% set col_classes = [
+  'grid__item',
+  grid_width == 'text' ? 'col-8 offset-2' : 'col-12',
+  'mb-4'
+] %}
+
+{% if grid_numcols == 4 %}
+  {% set col_other_classes = [
+    'col-sm-6',
+    'col-md-4',
+    'col-lg-3',
+  ] %}
+{% elseif grid_numcols == 3 %}
+  {% set col_other_classes = [
+    'col-sm-12',
+    'col-md-6',
+    'col-lg-4',
+  ] %}
+{% elseif grid_numcols == 2 %}
+  {% set col_other_classes = [
+    'col-lg-6'
+  ] %}
+{% endif %}
+
+{% set col_classes = col_classes | merge(col_other_classes|default([])) | remove_empty %}
+
+{% set col_attributes = {
+  'class': col_classes,
+} %}
+
+
+<div class="row grid">
+  {% for item in grid_items %}
+    {# Coming from a field template #}
+    {% if item.attributes and item.content %}
+      {% set col_attributes = col_attributes | merge(item.attributes|default({})) | remove_empty %}
+      {% set col_content = item.content %}
+    {# Coming from a paragraph or elsewhere #}
+    {% else %}
+      {% set col_content = item %}
+    {% endif %}
+
+    <div {{ add_attributes(col_attributes) }}>
+      {{ col_content }}
+    </div>
+    
+  {% endfor %}
+</div>

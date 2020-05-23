@@ -1,0 +1,136 @@
+menu:
+  example_var: This is an example var
+
+menu_demo_block:
+  title: menu Component
+
+menu_basic:
+  menu_name: 'main'
+  items:
+    - title: 'Main Link 1'
+      url: '#'
+      original_link:
+        options:
+          attributes:
+            class: ''
+      in_active_trail: false
+    - title: 'Main Link 2'
+      url: '#'
+      original_link:
+        options:
+          attributes:
+            class: ''
+      in_active_trail: false
+    - title: 'Main Link 3'
+      url: '#'
+      original_link:
+        options:
+          attributes:
+            class: ''
+      in_active_trail: false
+    - title: 'Main Link 4'
+      url: '#'
+      original_link:
+        options:
+          attributes:
+            class: ''
+      in_active_trail: false
+
+menu_dropdown:
+  menu_name: dropdown
+  items:
+    - title: 'Menu item one'
+      url: '#'
+      original_link:
+        options:
+          attributes:
+            class: ''
+      in_active_trail: false
+    - title: 'Menu item two'
+      url: '#'
+      original_link:
+        options:
+          attributes:
+            class: ''
+      in_active_trail: true
+      is_expanded: true
+      below:
+        - title: 'Submenu item one'
+          url: '#'
+          original_link:
+            options:
+              attributes:
+                class: ''
+          in_active_trail: false
+        - title: 'Submenu item two'
+          url: '#'
+          original_link:
+            options:
+              attributes:
+                class: ''
+          in_active_trail: false
+        - title: 'Submenu item three'
+          url: '#'
+          original_link:
+            options:
+              attributes:
+                class: ''
+          in_active_trail: false
+    - title: 'Menu item three'
+      url: '#'
+      original_link:
+        options:
+          attributes:
+            class: ''
+      in_active_trail: false
+      is_expanded: true
+      below:
+        - title: 'Submenu item one'
+          url: '#'
+          original_link:
+            options:
+              attributes:
+                class: ''
+          in_active_trail: false
+        - title: 'Submenu item two'
+          url: '#'
+          original_link:
+            options:
+              attributes:
+                class: ''
+          in_active_trail: false
+        - title: 'Submenu item three'
+          url: '#'
+          original_link:
+            options:
+              attributes:
+                class: ''
+          in_active_trail: false
+    - title: 'Menu item four'
+      url: '#'
+      original_link:
+        options:
+          attributes:
+            class: ''
+      in_active_trail: false
+
+menu_utility:
+  menu_name: utility
+  menu_class:
+    - justify-content-end
+    - align-items-center
+  items:
+    - title: 'Util Link 1'
+      url: '#'
+      original_link:
+        options:
+          attributes:
+            class: ''
+      in_active_trail: false
+    - title: 'Util Link 2'
+      url: '#'
+      original_link:
+        options:
+          attributes:
+            class: ''
+      in_active_trail: false

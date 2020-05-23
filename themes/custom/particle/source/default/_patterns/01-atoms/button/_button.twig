@@ -1,0 +1,72 @@
+{#
+/**
+ * @file Button!
+ * Documenting Button Examples from Bootstrap.
+ *
+ * Available variables:
+ * - button_element: [string]: button|a|input choose the element type for your button.
+ * - button_type: [string]: the html 'type' attribute.
+ * - button_outline: [boolean]: True|False, remove all background colors and images from a button.
+ * - buttonless_dropdown: [boolean]: True|False, toggle `btn` base class for dropdowns.
+ * - button_color: [string]: primary|secondary|success|danger|warning|info|light|dark the color of the button.
+ * - button_size: [string]: lg|sm set whether the button is large or small.
+ * - button_block:  [boolean]: True|False set button to occupy the full width the parent element.
+ * - button_active: [boolean]: True|False set button to appear pressed.
+ * - button_other_classes: [array] Other classes not specified in the template.
+ * - button_toggle: [string]: button|collapse set button's data-toggle html value.
+ * - button_link: [string]: the URL the button will lead to.
+ * - button_value: [string]: the html 'value' attribute.
+ * - button_id: [string]: The button's html 'id' attribute.
+ * - button_disabled: [boolean]: True|False set button to appear disabled.
+ * - button_other_attributes: [array]: Other attributes not specified in the template.
+ * - button_text: [string]: Display text on the button.
+ * - button_icon_custom: Boolean: If the icon is a custom icon
+ * - button_icon_name: String: Name of custom or Icon library icon
+ * @see https://getbootstrap.com/docs/4.0/components/buttons/
+ */
+#}
+
+{% set button_element = button_element | default ('button') %}
+{% set button_icon_custom = button_icon_custom | default (false) %}
+
+{% set button_classes = [
+  buttonless_dropdown ? '' : 'btn',
+  (button_color and not button_outline) ? 'btn-' ~ button_color,
+  button_outline ? 'btn-outline-' ~ button_color,
+  button_size ? 'btn-' ~ button_size,
+  button_block ? 'btn-block',
+  button_active ? 'active',
+  button_icon_name ? 'btn--icon',
+] | merge(button_other_classes|default([])) | remove_empty %}
+
+{% set button_attributes = {
+  'aria-pressed': (button_active ? 'true' : 'false'),
+  'data-toggle': (button_toggle ? button_toggle),
+  'href': (button_link ? button_link),
+  'value': (button_value ? button_value),
+  'id': (button_id ? button_disabled),
+  'disabled': (button_disabled ? button_disabled),
+  'type': (button_element != 'a' ? button_type : 'button'),
+  'class': button_classes,
+} | merge(button_other_attributes|default({})) | remove_empty %}
+
+<{{ button_element }} {{ add_attributes(button_attributes) }}>
+
+  {% if button_icon_name %}
+
+    {% if button_icon_custom %}
+      {% include '@atoms/svg/_svg.twig' with {
+        svg: {
+          svgpath: '@atoms/svg/svg/'~button_icon_name~'.svg',
+        }
+      } %}
+    {% else %}
+      {% include '@atoms/icon/_icon.twig' with {
+        icon_name: button_icon_name,
+      } %}
+    {% endif %}
+  {% endif %}
+
+  {{ button_text }}
+  {% block right %}{% endblock right %}
+</{{ button_element }}>

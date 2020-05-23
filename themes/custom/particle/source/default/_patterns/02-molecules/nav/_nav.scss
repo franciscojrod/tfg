@@ -1,0 +1,102 @@
+// The non-printing variables, functions, and mixins of
+//   @import ~tokens/sass/non-printing/non-printing;
+// are provided to this file via:
+//   webpack.particle.js: sass-loader.data|includePaths
+
+@import '~bootstrap/scss/nav';
+
+// Add custom code here
+.nav {
+  font-family: $headings-font-family;
+  &--border {
+    border-color: $light;
+    border-style: solid;
+  }
+}
+
+.nav-link {
+  font-weight: bold;
+  line-height: 1.2;
+  color: map-get($theme-colors, 'dark');
+  display: inline-block;
+  &:hover,
+  &:focus,
+  &:active,
+  &.active {
+    color: map-get($theme-colors, 'primary');
+  }
+}
+
+.nav-link + .dropdown-toggle {
+  color: map-get($theme-colors, 'dark');
+  vertical-align: middle;
+  &:hover {
+    color: map-get($theme-colors, 'primary');
+  }
+  @include media-breakpoint-down(lg) {
+    position: relative;
+    right: 0.5rem;
+    &:hover {
+      color: map-get($theme-colors, 'dark');
+    }
+  }
+}
+
+.nav--main {
+  @include media-breakpoint-up(md) {
+    .nav-link {
+      padding: $nav-link-padding-y * 4 $nav-link-padding-x;
+    }
+  }
+
+  &.nav--show-dropdown-toggle {
+    @include media-breakpoint-up(md) {
+      .nav-link-dropdown {
+        padding: $nav-link-padding-y * 3 $nav-link-padding-x / 4 $nav-link-padding-y * 3 $nav-link-padding-x;
+      }
+      .dropdown-toggle {
+        padding-right: $nav-link-padding-x * 0.75;
+      }
+    }
+  }
+
+  &.nav--hide-dropdown-toggle {
+    @include media-breakpoint-up(lg) {
+      // stylelint-disable max-nesting-depth, selector-max-specificity
+      .nav-item:hover {
+        .dropdown-menu {
+          display: block;
+        }
+      }
+      // stylelint-enable
+    }
+    // Always show toggles at tablet regardless
+    @include media-breakpoint-up(lg) {
+      .dropdown-toggle {
+        display: none;
+      }
+      
+    }
+  }
+
+}
+
+.nav--utility {
+  align-items: center;
+  font-family: $font-family-nunito-sans;
+  font-size: $font-size-md;
+  height: rem-calc(40px);
+
+  .nav-item {
+    border-left: 1px solid theme-colors(light);
+
+    &:last-child {
+      border-right: 1px solid theme-colors(light);
+    }
+  }
+
+  .nav-link {
+    font-weight: $font-weight-normal;
+    padding: .75rem 1rem;
+  }
+}

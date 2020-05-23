@@ -1,0 +1,5 @@
+lightbox:
+  example_var: This is an example var
+
+lightbox_demo_block:
+  title: lightbox Component

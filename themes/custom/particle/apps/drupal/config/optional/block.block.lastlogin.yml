@@ -1,0 +1,19 @@
+langcode: en
+status: false
+dependencies:
+  module:
+    - login_history
+  theme:
+    - seven
+id: lastlogin
+theme: seven
+region: draggable_dashboard_region
+weight: null
+provider: null
+plugin: last_login_block
+settings:
+  id: last_login_block
+  label: 'Last login'
+  provider: login_history
+  label_display: visible
+visibility: {  }

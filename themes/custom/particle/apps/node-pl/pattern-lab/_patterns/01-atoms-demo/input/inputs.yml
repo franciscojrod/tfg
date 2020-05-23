@@ -1,0 +1,31 @@
+input_demo_block:
+  title: input Component
+
+
+inputs:
+  - input_type: text
+    input_label: 'This is a label'
+    input_value: 'This is a value'
+  - input_type: email
+    input_placeholder: 'Insert an email address'
+  - input_type: file
+    input_label: 'This is a label'
+  - input_type: check
+    input_label: 'This is a checkbox'
+  - input_type: radio
+    input_label: 'This is a radio'
+  - input_element: select
+    input_label: 'Select an option'
+    input_options:
+      - option_text: 'Option default'
+        option_value: 0
+      - option_text: 'Option 1'
+        option_value: 1
+      - option_text: 'Option 2'
+        option_value: 2
+      - option_text: 'Option 3'
+        option_value: 3
+  - input_element: textarea
+    input_placeholder: 'This is a text area...'
+    input_other_attributes:
+      rows: 5

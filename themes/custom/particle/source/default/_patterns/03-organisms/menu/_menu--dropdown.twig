@@ -1,0 +1,133 @@
+{#
+/**
+ * @file
+ * menu
+ *
+ * Theme override for main menu (dropdown variation).
+ * Forked from https://github.com/forumone/gesso/blob/8.x-3.x/source/_patterns/04-components/menu/menu.twig
+ * Available variables:
+ * - menu_name: The machine name of the menu.
+ * - items: A nested list of menu items. Each menu item contains:
+ *   - attributes: HTML attributes for the menu item.
+ *   - below: The menu item child items.
+ *   - title: The menu link title.
+ *   - url: The menu link url, instance of \Drupal\Core\Url
+ *   - localized_options: Menu link localized options.
+ *   - is_expanded: TRUE if the link has visible children within the current
+ *     menu tree.
+ *   - is_collapsed: TRUE if the link has children within the current menu tree
+ *     that are not currently visible.
+ *   - in_active_trail: TRUE if the link is in the active trail.
+ * - menu_level: increments for children menus
+ * - menu_class: additional menu classes
+ * - item_class: additional item classes
+ * - link_class: additional link classes
+ * - attributes: additional menu attributes
+ * - show_dropdown_arrows: Boolean: Whether the dropdown arrows should be shown on desktop or not.
+#}
+{% import _self as menus %}
+
+{{ menus.menu_links(items, attributes, 0, menu_name, menu_class, item_class, link_class, show_dropdown_arrows) }}
+
+{% macro menu_links(items, attributes, menu_level, menu_name, menu_class, item_class, link_class, show_dropdown_arrows) %}
+  {% import _self as menus %}
+  {% if items %}
+    {% if menu_level == 0 %}
+      {# double quotes around class using menu_name needed for interpolation #}
+      {% set menu_classes = [
+        'nav',
+        "nav--#{menu_name}",
+        show_dropdown_arrows ? 'nav--show-dropdown-toggle' : 'nav--hide-dropdown-toggle',
+        'pr-2',
+        'navbar-nav',
+        'mr-auto',
+      ] | merge(menu_class|default([])) | remove_empty %}
+
+      {% set menu_attributes = {
+        'class': menu_classes
+      } | merge (attributes|default({})) %}
+
+      <ul {{ add_attributes(menu_attributes) }}>
+
+      {% for item in items %}
+        {% set item_classes = ['nav-item'] %}
+        {% set link_classes = ['nav-link'] %}
+
+        {% if item.below %}
+          {% set item_classes = item_classes|merge(['dropdown']) %}
+          {% set link_classes = link_classes|merge(['nav-link-dropdown']) %}
+        {% endif %}
+        {% if item.in_active_trail %}
+          {# Add active class for Bootstrap #}
+          {% set item_classes = item_classes|merge(['is-active-trail', 'active']) %}
+          {% set link_classes = link_classes|merge(['is-active-trail', 'active']) %}
+        {% endif %}
+        {% if item.is_collapsed %}
+          {% set item_classes = item_classes|merge(['is-collapsed']) %}
+          {% set link_classes = link_classes|merge(['is-collapsed']) %}
+        {% elseif item.is_expanded %}
+          {% set item_classes = item_classes|merge(['is-expanded']) %}
+          {% set link_classes = link_classes|merge(['is-expanded']) %}
+        {% endif %}
+        {% if item['original_link'].options.attributes.class %}
+          {% set link_classes = link_classes|merge([item['original_link'].options.attributes.class]) %}
+        {% endif %}
+        {% if item_class %}
+          {% set item_classes = item_classes|merge(item_class) %}
+        {% endif %}
+        {% if link_class %}
+          {% set link_classes = link_classes|merge(link_class) %}
+        {% endif %}
+
+        {% set menu_item_attributes = {
+          'class': item_classes
+        } %}
+
+        {% set menu_link_attributes = {
+          'class': link_classes
+        } %}
+
+        <li {{ add_attributes(menu_item_attributes) }}>
+          {{ link(item.title, item.url, menu_link_attributes) }}
+          {% if item.below and item.is_expanded %}
+            {# Can't use link() since href of "#" gives URI error
+            {{ link(dropdown_arrow_text, "#", dropdown_arrow_attributes) }} #}
+            <a class="dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"></a>
+            {{ menus.menu_links(item.below, attributes, menu_level + 1) }}
+          {% endif %}
+        </li>
+      {% endfor %}
+    {% else %} {# Menu level of 1 or greater #}
+      <ul class="dropdown-menu">
+
+      {% for item in items %}
+
+        {% set item_classes = [] %}
+        {# Bootstrap's default dropdown markup places 'dropdown-item' on links #}
+        {% set link_classes = ['dropdown-item'] %}
+
+        {% if item.below %}
+          {% set item_classes = item_classes|merge(['dropdown-submenu']) %}
+          {% set link_classes = link_classes|merge([]) %}
+        {% endif %}
+
+        {% set dropdown_item_attributes = {
+          'class': item_classes
+        } %}
+
+        {% set dropdown_link_attributes = {
+          'class': link_classes
+        } %}
+
+        <li {{ add_attributes(dropdown_item_attributes) }}>
+          {{ link(item.title, item.url, dropdown_link_attributes) }}
+          {% if item.below and item.is_expanded %}
+            <a class="dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"></a>
+            {{ menus.menu_links(item.below, attributes, menu_level + 1) }}
+          {% endif %}
+        </li>
+      {% endfor %}
+    {% endif %}
+    </ul>
+  {% endif %}
+{% endmacro %}

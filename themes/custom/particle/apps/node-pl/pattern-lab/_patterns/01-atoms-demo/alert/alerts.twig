@@ -1,0 +1,19 @@
+{% embed '@atoms/grid/_grid-1-up.twig' %}
+  {% set container = true %}
+
+  {% block column_1 %}
+    <h1 class="mb-3">Alerts</h1>
+
+    <hr>
+
+    {% include '@atoms/alert/_alert.twig' with status %}
+
+    {% include '@atoms/alert/_alert.twig' with warning %}
+
+    {% include '@atoms/alert/_alert.twig' with error %}
+
+    {% include '@atoms/alert/_alert.twig' with info %}
+
+
+  {% endblock %}
+{% endembed %}

@@ -1,0 +1,46 @@
+{# This pattern should NOT be consumed directly by Drupal.
+ # It is a guideline for regions, divs, and classes inside
+ # of html.html.twig and page.html.twig while mocking the
+ # familiar site structure for Pattern Lab.
+ #}
+
+<div class="border-bottom border-light">
+  {% include '@organisms/menu/_menu.twig' with menu_utility %}
+</div>
+
+<div class="border-bottom border-light">
+  <div class="container">
+    <div class="row">
+      {% include '@organisms/navbar/_navbar.twig' with {
+        navbar: navbar_demo
+      } %}
+    </div>
+  </div>
+</div>
+
+<main class="main-content">
+  {% if has_breadcrumb %}
+    <div class="region--breadcrumb">
+      {% include '@atoms/breadcrumb/_breadcrumb.twig' %}
+    </div>
+  {% endif %}
+
+  <div class="layout-container bg-light">
+      <main role="main">
+        <a id="main-content" tabindex="-1"></a>{# link is in html.html.twig #}
+        <section class="layout-content">
+
+          {% block content %}
+            Page content
+          {% endblock %}
+
+        </section>
+      </main>
+    </div>{# /.layout-container #}
+  </div>{# /.page-wrapper #}
+  
+</main>
+
+{% block footer %}
+  {% include "@organisms/footer/_footer.twig" %}
+{% endblock footer %}

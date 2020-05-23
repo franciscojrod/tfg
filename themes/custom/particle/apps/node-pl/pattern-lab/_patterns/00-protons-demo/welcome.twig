@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+
+      <div class="text-center mt-sm-5">
+
+        {# Spinner styles are hardcoded in 00-head.twig #}
+        <div class="spinner">
+          <div class="double-bounce1"></div>
+          <div class="double-bounce2"></div>
+        </div>
+
+        <h1 class="mb-4">Welcome to the TFG</h1>
+
+        {% set welcome_image = {
+          variant: 'primary',
+          src: paths.images ~ '/logo.png',
+          alt: 'A friendly goat wearing a space helmet. The Astrogoat!',
+        } %}
+
+        {% include "@atoms/image/_image.twig" with {
+          image: welcome_image
+        } %}
+
+        <p class="mt-4">Este es un sitio de desmostración para el TFG de Francisco Javier Rodriguez</p>
+        <p>La integración de un design system junto con un backend Drupal.</p>
+        <p>En este sitio se pueden ver los diferentes componentes, distribuidos según atomic design que pueden ser utilizados.</p>
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,27 @@
+{% extends '@demo/_demo-block.twig' %}
+
+{% set demo = grid_demo_block %}
+
+{% block content %}
+  <div class="mb-3">
+    {% set card_1 %}
+      {% include '@molecules/card/_card.twig' with image_card_1 %}
+    {% endset %}
+
+    {% set card_2 %}
+      {% include '@molecules/card/_card.twig' with video_card_2 %}
+    {% endset %}
+
+    {% set card_3 %}
+      {% include '@molecules/card/_card.twig' with text_card_3 %}
+    {% endset %}
+
+    {% include '@templates/grid/_grid.twig' with {
+      grid_items: [
+        card_1,
+        card_2,
+        card_3
+      ]
+    } %}
+  </div>
+{% endblock %}

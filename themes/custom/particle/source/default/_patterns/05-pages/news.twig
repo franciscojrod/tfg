@@ -1,0 +1,61 @@
+{% extends '@templates/site-container.twig' %}
+  {% block content %}
+
+    {% set has_sidebar = false %}
+    {% set sidebar_position = false %}
+
+    {%
+      set article_attributes = {
+        'class': [
+          node.bundle|clean_class,
+          node.isPromoted() ? 'node--promoted',
+          node.isSticky() ? 'node--sticky',
+          not node.isPublished() ? 'node--unpublished',
+          view_mode ? view_mode|clean_class,
+          has_sidebar ? 'has-sidebar' : 'has-no-sidebar',
+        ]
+      }
+    %}
+
+    {% embed '@templates/sidebar/_sidebar.twig' with {
+      article_attributes: article_attributes,
+      has_header: true,
+      title: 'Test News Article',
+      has_breadcrumb: true,
+      has_sidebar: has_sidebar,
+      sidebar_position: sidebar_position,
+    } %}
+
+      {% block header %}
+        Header paragraph
+      {% endblock %}
+
+      {% block breadcrumb %}
+        {% import '@macros/bootstrap.twig' as bootstrap %}
+        
+        {% set breadcrumb_bootstrapped %}
+          {% include '@atoms/breadcrumb/_breadcrumb.twig' with breadcrumb %}
+        {% endset %}
+
+        {{ bootstrap.strap('container', 'row', 'col-12', breadcrumb_bootstrapped) }}
+      {% endblock %}
+
+      {% if sidebar_position == 'left' %}
+        {% block sidebar_left %}
+          Sidebar left
+        {% endblock %}
+      {% endif %}
+
+      {% block main %}
+        News paragraphs will go here.
+      {% endblock %}
+
+      {% if sidebar_position == 'right' %}
+        {% block sidebar_right %}
+          Sidebar right
+        {% endblock %}
+      {% endif %}
+
+    {% endembed %}
+
+  {% endblock %}

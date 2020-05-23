@@ -1,0 +1,87 @@
+{#
+ /**
+ * @file
+ * Theme override for main menu (dropdown variation).
+ * Forked from https://github.com/forumone/gesso/blob/8.x-3.x/source/_patterns/04-components/menu/menu.twig
+ * Available variables passed to PL:
+ * - menu_name: The machine name of the menu.
+ * - items: A nested list of menu items. Each menu item contains:
+ *   - attributes: HTML attributes for the menu item.
+ *   - below: The menu item child items.
+ *   - title: The menu link title.
+ *   - url: The menu link url, instance of \Drupal\Core\Url
+ *   - localized_options: Menu link localized options.
+ *   - is_expanded: TRUE if the link has visible children within the current
+ *     menu tree.
+ *   - is_collapsed: TRUE if the link has children within the current menu tree
+ *     that are not currently visible.
+ *   - in_active_trail: TRUE if the link is in the active trail.
+ * - menu_level: increments for children menus
+ * - menu_class: additional menu classes
+ * - item_class: additional item classes
+ * - link_class: additional link classes
+ * - attributes: additional menu attributes
+ *
+ */
+#}
+
+{% import _self as menus %}
+
+{{ menus.menu_links(items, attributes, 0, menu_name, menu_class, item_class, link_class) }}
+
+{% macro menu_links(items, attributes, menu_level, menu_name, menu_class, item_class, link_class) %}
+  {% import _self as menus %}
+  {% if items %}
+    {% if menu_level == 0 %}
+      {# double quotes around class using menu_name needed for interpolation #}
+      {% set menu_classes = [
+        'nav',
+        "nav--#{menu_name}",
+      ] | merge(menu_class|default([])) | remove_empty %}
+
+      {% set menu_attributes = {
+        'class': menu_classes
+      } | merge (attributes|default({})) %}
+
+      <ul {{ add_attributes(menu_attributes) }}>
+    {% else %}
+      <ul class="nav">
+    {% endif %}
+    {% for item in items %}
+
+      {% set item_classes = ['nav-item'] %}
+      {% set link_classes = ['nav-link'] %}
+
+      {% if item.in_active_trail %}
+        {# Add active class for Bootstrap #}
+        {% set item_classes = item_classes|merge(['is-active-trail', 'active']) %}
+        {% set link_classes = link_classes|merge(['is-active-trail', 'active']) %}
+      {% endif %}
+      {% if item['original_link'].options.attributes.class %}
+        {% set link_classes = link_classes|merge([item['original_link'].options.attributes.class]) %}
+      {% endif %}
+      {% if item_class %}
+        {% set item_classes = item_classes|merge(item_class) %}
+      {% endif %}
+      {% if link_class %}
+        {% set link_classes = link_classes|merge(link_class) %}
+      {% endif %}
+
+      {% set menu_item_attributes = {
+        'class': item_classes
+      } %}
+
+      {% set menu_link_attributes = {
+        'class': link_classes
+      } %}
+
+      <li {{ add_attributes(menu_item_attributes) }}>
+        {{ link(item.title, item.url, menu_link_attributes) }}
+        {% if item.below and item.is-expanded %}
+          {{ menus.menu_links(item.below, attributes, menu_level + 1) }}
+        {% endif %}
+      </li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endmacro %}

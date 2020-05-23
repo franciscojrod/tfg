@@ -1,0 +1,84 @@
+image_card_1:
+  card_title: Card with image and text
+  card_text: Some quick example text to build on the card title and make up the bulk of the card's content.
+  card_button_text: 'more-link'
+  card_button_link: '#'
+  card_image: https://images.unsplash.com/photo-1442033025416-c6a7da752d71?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1140&h=685&q=80
+
+
+video_card_2:
+  card_title: Card with a video and text
+  card_text: Some quick example text.
+  card_other_classes:
+    - 'card--video'
+  card_button_text: 'more-link'
+  card_button_link: '#'
+  card_image: https://images.unsplash.com/photo-1442033025416-c6a7da752d71?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1140&h=685&q=80
+
+text_card_3:
+  card_title: Card with text
+  card_text: Some quick example text to build on the card title and make up the bulk of the card's content.
+  card_text_color: dark
+  card_button_text: 'more-link'
+  card_button_link: '#'
+
+text_date_card_4:
+  card_title: Card with article and text
+  card_date: 28. Februar 2019
+  card_text: Some quick example text to build on the card title and make up the bulk of the card's content.
+  card_text_color: dark
+  card_button_text: 'more-link'
+  card_button_link: '#'
+
+
+image_date_card_5:
+  card_title: Card with image, article and text
+  card_date: 28. Februar 2019
+  card_text: Some quick example text to build on the card title and make up the bulk of the card's content.
+  card_text_color: dark
+  card_other_classes:
+    - 'card--hover-shadow'
+  card_link: 'https://github.com/phase2/particle'
+  card_image: https://images.unsplash.com/photo-1442033025416-c6a7da752d71?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1140&h=685&q=80
+  card_button_text: 'more-link'
+  card_button_link: '#'
+
+contact_card_short_6:
+  card_title: Card with contact short
+  card_info: Type of employment
+  card_text: 'T  +49 30 123 123 44</br>
+              F  +49 30 123 123 55</br>
+              info@tfg.es</br>
+              www.tfg.es'
+  card_image: https://images.unsplash.com/photo-1442033025416-c6a7da752d71?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1140&h=685&q=80
+
+contact_card_long_7:
+  card_title: Card with contact long
+  card_text: 'Calle 12</br>
+              12345 Ciudad</br>
+              Pais</br>
+              T  +49 30 123 123 44</br>
+              F  +49 30 123 123 55</br>
+              info@tfg.es</br>
+              www.tfg.es'
+  card_text_color: dark
+
+download_card_8:
+  card_title: Card download
+  card_text: Some quick example text.
+  card_text_color: dark
+  card_image: https://images.unsplash.com/photo-1442033025416-c6a7da752d71?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1140&h=685&q=80
+  card_button_text: 'more-link'
+  card_button_link: '#'
+
+full_image_card_9:
+  card_title: Card full image
+  card_text_color: dark
+  card_other_classes:
+    - 'card--full-image'
+  card_other_attributes:
+    style: 'background-image: url(https://images.unsplash.com/photo-1442033025416-c6a7da752d71?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=380&h=480&q=100)'
+  card_button_text: 'more-link'
+  card_button_link: '#'
+
+grid_numcols: 3

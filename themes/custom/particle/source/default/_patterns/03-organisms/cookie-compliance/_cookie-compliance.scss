@@ -1,0 +1,72 @@
+// Custom styles for cookie-compliance
+
+// The non-printing variables, functions, and mixins of 00-protons/variables
+// are provided to this file via:
+//   webpack.particle.js: sass-loader.data|includePaths
+
+// It is recommended to use strict BEM-syntax and a mobile-first approach!
+
+.cookie-compliance {
+  background: map-get($theme-colors, secondary);
+  border-top: 2px solid map-get($theme-colors, primary);
+  button {
+    @include media-breakpoint-down(md) {
+      width: 100%;
+    }
+  }
+}
+
+.cookie-compliance__content {
+  margin: 0 auto;
+  max-width: 80%;
+  position: relative;
+  display: block;
+}
+.cookie-compliance__message {
+  float: left;
+  max-width: 60%;
+  @include media-breakpoint-down(md) {
+    max-width: 100%;
+    float: none;
+  }
+}
+.cookie-compliance__buttons {
+  float: right;
+  max-width: 40%;
+  text-align: left;
+  button.decline-button,
+  button.agree-button {
+    margin-top: map-get($spacers, 3);
+  }
+  @include media-breakpoint-down(md) {
+    float: none;
+    margin-top: map-get($spacers, 2);
+    max-width: 100%;
+
+    button {
+      margin-bottom: map-get($spacers, 2);
+    }
+  }
+}
+.eu-cookie-compliance-more-button {
+  text-decoration: none;
+}
+
+// stylelint-disable max-nesting-depth, selector-max-specificity, selector-max-id
+#sliding-popup {
+  width: 100%;
+  .cookie-compliance {
+    h2,
+    h3,
+    p {
+      color: $body-color;
+    }
+    p {
+      font-weight: $font-weight-normal;
+      font-size: $font-size-sm;
+    }
+    h3 {
+      font-size: $h3-font-size;
+    }
+  }
+}

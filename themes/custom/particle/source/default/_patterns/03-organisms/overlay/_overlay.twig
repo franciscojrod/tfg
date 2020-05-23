@@ -1,0 +1,28 @@
+{#
+/**
+ * @file
+ * overlay
+ *
+ * Available variables for overlay:
+ *  - overlay.variable_name [variable_type]: Description of the variable. Example below.
+ *  - overlay.invert [bool]: When set, colors will be inverted for light display on dark background.
+ */
+#}
+
+<div class="overlay" id="overlay" style="display: none;">
+  <div class="container pt-2">
+    <div class="overlay__top position-relative clearfix mb-3">
+      <a href="#" class="js-overlay-close overlay-toggle overlay__close float-right" aria-label="Close" title="Close" role="button">
+        {% include '@atoms/icon/_icon.twig' with {
+          icon_name: 'close',
+          icon_other_classes: 'd-none d-lg-block'
+        } %}
+      </a>
+    </div>
+    <div class="overlay__content">
+      {% block overlay %}
+
+      {% endblock %}
+    </div>
+  </div>
+</div>

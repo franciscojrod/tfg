@@ -1,0 +1,21 @@
+// The non-printing variables, functions, and mixins of
+//   @import ~tokens/sass/non-printing/non-printing;
+// are provided to this file via:
+//   webpack.particle.js: sass-loader.data|includePaths
+
+@import '~bootstrap/scss/alert';
+@import '~bootstrap/scss/mixins/alert';
+
+.alert > p:last-child {
+  margin-bottom: 0;
+}
+
+// Alternate styles
+//
+// Generate contextual modifier classes for colorizing the alert.
+
+@each $color, $value in $status-colors {
+  .alert-#{$color} {
+    @include alert-variant(theme-color-level-second($color, $alert-bg-level), theme-color-level-second($color, $alert-border-level), theme-color-level-second($color, $alert-color-level));
+  }
+}

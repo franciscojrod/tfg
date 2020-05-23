@@ -1,0 +1,38 @@
+{#
+/**
+ * @file
+ * Theme override to display a region.
+ *
+ * Available variables:
+ * - content: The content for this region, typically blocks.
+ * - attributes: HTML attributes for the region div.
+ * - region: The name of the region variable as defined in the theme's
+ *   .info.yml file.
+ *
+ * @see template_preprocess_region()
+ */
+#}
+
+{% embed '@organisms/footer/_footer.twig' %}
+
+  {% block footer_first %}
+    Contact block
+  {% endblock %}
+
+  {% block footer_second %}
+    Social Menu
+  {% endblock %}
+
+  {% block footer_third %}
+    {% include '@molecules/newsletter-signup/_newsletter-signup.twig' %}
+  {% endblock %}
+
+  {% block footer_bottom_left %}
+    {{ drupal_entity('block', 'particle_footer') }}
+  {% endblock %}
+
+  {% block footer_bottom_right %}
+    Copyright
+  {% endblock %}
+
+{% endembed %}

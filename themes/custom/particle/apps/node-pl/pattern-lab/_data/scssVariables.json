@@ -1,0 +1,128 @@
+{
+  "scssColors": {
+    "primary": "rgb(115, 237, 255)",
+    "secondary": "rgb(255, 255, 255)",
+    "light": "rgb(243, 243, 247)",
+    "dark": "rgb(1, 0, 67)",
+    "blue-grey": "rgb(127, 127, 161)",
+    "indigo-dark": "rgb(15, 14, 104)",
+    "blue": "rgb(115, 237, 255)",
+    "blue-dark": "rgb(0, 104, 208)",
+    "chacoral": "rgb(56, 75, 83)",
+    "drupal": "rgb(0, 119, 192)",
+    "twitter": "rgb(29, 161, 242)",
+    "grey-background": "rgba(55, 75, 83, 0.05)",
+    "chacoral-light": "rgb(56, 75, 83)"
+  },
+  "buttonColors": {
+    "primary": {
+      "color": "rgb(255, 255, 255)",
+      "bg": "rgb(115, 237, 255)",
+      "border": "rgba(0, 0, 0, 0)",
+      "hover-color": "rgb(255, 255, 255)",
+      "hover-bg": "rgb(64, 230, 255)",
+      "hover-border": "rgba(0, 0, 0, 0)"
+    },
+    "secondary": {
+      "color": "rgb(115, 237, 255)",
+      "bg": "rgb(255, 255, 255)",
+      "border": "rgba(0, 0, 0, 0)",
+      "hover-color": "rgb(64, 230, 255)",
+      "hover-bg": "rgb(255, 255, 255)",
+      "hover-border": "rgba(0, 0, 0, 0)"
+    },
+    "pink-light": {
+      "color": [
+        "rgb(255, 255, 255)",
+        "rgb(115, 237, 255)"
+      ],
+      "bg": "rgb(115, 237, 255)",
+      "border": "rgba(0, 0, 0, 0)",
+      "hover-color": "rgb(229, 50, 45)",
+      "hover-bg": "rgb(64, 230, 255)",
+      "hover-border": "rgba(0, 0, 0, 0)"
+    },
+    "blue-light": {
+      "color": "rgb(15, 14, 104)",
+      "bg": "rgb(219, 219, 231)",
+      "border": "rgba(0, 0, 0, 0)",
+      "hover-color": "rgb(15, 14, 104)",
+      "hover-bg": "rgb(64, 230, 255)",
+      "hover-border": "rgba(0, 0, 0, 0)"
+    }
+  },
+  "statusColors": {
+    "info": "rgb(219, 219, 231)",
+    "success": "rgb(90, 160, 118)",
+    "warning": "rgb(215, 179, 92)",
+    "danger": "rgb(255, 111, 13)"
+  },
+  "primaryColors": {
+    "primary": "rgb(115, 237, 255)",
+    "secondary": "rgb(255, 255, 255)",
+    "light": "rgb(243, 243, 247)",
+    "dark": "rgb(1, 0, 67)",
+    "blue-grey": "rgb(127, 127, 161)",
+    "indigo-dark": "rgb(15, 14, 104)",
+    "blue": "rgb(115, 237, 255)",
+    "blue-dark": "rgb(0, 104, 208)",
+    "chacoral": "rgb(56, 75, 83)",
+    "drupal": "rgb(0, 119, 192)",
+    "twitter": "rgb(29, 161, 242)",
+    "grey-background": "rgba(55, 75, 83, 0.05)",
+    "chacoral-light": "rgb(56, 75, 83)"
+  },
+  "neutralHues": {
+    "lightest-gray": "rgb(240, 240, 240)",
+    "light-gray": "rgb(228, 228, 228)",
+    "gray": "rgb(213, 213, 213)",
+    "dark-gray": "rgb(51, 51, 51)",
+    "darkest-gray": "rgb(43, 43, 43)"
+  },
+  "scssBreakpoints": {
+    "xs": 0,
+    "sm": "576px",
+    "md": "768px",
+    "lg": "992px",
+    "xl": "1240px"
+  },
+  "scssSpacing": {
+    "0": 0,
+    "1": "0.25rem",
+    "2": "0.5rem",
+    "3": "1rem",
+    "4": "1.5rem",
+    "5": "2rem",
+    "6": "2.5rem",
+    "7": "3rem",
+    "8": "4rem"
+  },
+  "fontFamilies": {
+    "$font-family-sans-serif": "Open Sans,Helvetica Neue,Helvetica,Arial,sans-serif",
+    "$font-family-serif": "Oswald,Times New Roman,serif",
+    "$font-family-monospace": "Source Code Pro,Courier New,monospace",
+    "$headings-font-family": "Nunito Sans,Times New Roman,serif"
+  },
+  "fontSizes": {
+    "base": "1rem",
+    "lg": "1.125rem",
+    "sm": "0.8125rem"
+  },
+  "fontWeights": {
+    "light": 300,
+    "normal": 400,
+    "bold": 700
+  },
+  "scssIcons": [
+    "chevron-down",
+    "chevron-left",
+    "chevron-right",
+    "chevron-up",
+    "close",
+    "menu",
+    "person",
+    "play",
+    "search",
+    "twitter"
+  ]
+}

@@ -1,0 +1,21 @@
+// The non-printing variables, functions, and mixins of
+//   @import ~tokens/sass/non-printing/non-printing;
+// are provided to this file via:
+//   webpack.particle.js: sass-loader.data|includePaths
+
+.svgicon-demo--particle-mixin-chevron-right {
+  @include sprite('chevron-right');
+  height: rem-calc(40px);
+  width: rem-calc(40px);
+}
+
+.svgicon-demo--particle-mixin-person {
+  @include sprite(
+    'person',
+    (
+      color: theme-color('primary'),
+    )
+  );
+  width: rem-calc(40px);
+  height: rem-calc(40px);
+}

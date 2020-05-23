@@ -1,0 +1,37 @@
+.custom-file {
+  outline: none;
+}
+
+input.form-control,
+textarea.form-control,
+.custom-file-label {
+  &.is-valid {
+    &,
+    &:focus {
+      border-color: theme-colors('indigo-dark');
+    }
+  }
+  &.is-invalid {
+    color: theme-colors('primary');
+  }
+}
+
+// stylelint-disable selector-max-specificity
+.custom-file-input {
+  &.is-valid ~ .custom-file-label {
+    // TODO: find the way to insert this styles before the call to mixin 'form-validation-state'.
+    // stylelint-disable-next-line declaration-no-important
+    border-color: theme-colors('indigo-dark') !important;
+  }
+
+  &.is-invalid ~ .custom-file-label {
+    color: theme-colors('primary');
+  }
+}
+
+.custom-control {
+  ~ .form-text {
+    display: block;
+    text-align: left;
+  }
+}

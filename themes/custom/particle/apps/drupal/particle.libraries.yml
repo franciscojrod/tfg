@@ -1,0 +1,322 @@
+accordion:
+  version: 1.x
+  css:
+    theme:
+      ../../dist/app-drupal/assets/accordion.css: {}
+  js:
+    ../../dist/app-drupal/assets/accordion.js: {}
+  dependencies:
+    - particle/core
+alert:
+  version: 1.x
+  css:
+    theme:
+      ../../dist/app-drupal/assets/alert.css: {}
+  js:
+    ../../dist/app-drupal/assets/alert.js: {}
+  dependencies:
+    - particle/core
+article:
+  version: 1.x
+  css:
+    theme:
+      ../../dist/app-drupal/assets/article.css: {}
+  js:
+    ../../dist/app-drupal/assets/article.js: {}
+  dependencies:
+    - particle/core
+badge:
+  version: 1.x
+  css:
+    theme:
+      ../../dist/app-drupal/assets/badge.css: {}
+  js:
+    ../../dist/app-drupal/assets/badge.js: {}
+  dependencies:
+    - particle/core
+block:
+  version: 1.x
+  css:
+    theme:
+      ../../dist/app-drupal/assets/block.css: {}
+  js:
+    ../../dist/app-drupal/assets/block.js: {}
+  dependencies:
+    - particle/core
+branding:
+  version: 1.x
+  css:
+    theme:
+      ../../dist/app-drupal/assets/branding.css: {}
+  js:
+    ../../dist/app-drupal/assets/branding.js: {}
+  dependencies:
+    - particle/core
+breadcrumb:
+  version: 1.x
+  css:
+    theme:
+      ../../dist/app-drupal/assets/breadcrumb.css: {}
+  js:
+    ../../dist/app-drupal/assets/breadcrumb.js: {}
+  dependencies:
+    - particle/core
+button:
+  version: 1.x
+  css:
+    theme:
+      ../../dist/app-drupal/assets/button.css: {}
+  js:
+    ../../dist/app-drupal/assets/button.js: {}
+  dependencies:
+    - particle/core
+card:
+  version: 1.x
+  css:
+    theme:
+      ../../dist/app-drupal/assets/card.css: {}
+  js:
+    ../../dist/app-drupal/assets/card.js: {}
+  dependencies:
+    - particle/core
+carousel:
+  version: 1.x
+  css:
+    theme:
+      ../../dist/app-drupal/assets/carousel.css: {}
+  js:
+    ../../dist/app-drupal/assets/carousel.js: {}
+  dependencies:
+    - particle/core
+cookie_compliance:
+  version: 1.x
+  css:
+    theme:
+      ../../dist/app-drupal/assets/cookie_compliance.css: {}
+  js:
+    ../../dist/app-drupal/assets/cookie_compliance.js: {}
+  dependencies:
+    - particle/core
+dropdown:
+  version: 1.x
+  css:
+    theme:
+      ../../dist/app-drupal/assets/dropdown.css: {}
+  js:
+    ../../dist/app-drupal/assets/dropdown.js: {}
+  dependencies:
+    - particle/core
+footer:
+  version: 1.x
+  css:
+    theme:
+      ../../dist/app-drupal/assets/footer.css: {}
+  js:
+    ../../dist/app-drupal/assets/footer.js: {}
+  dependencies:
+    - particle/core
+form_group:
+  version: 1.x
+  css:
+    theme:
+      ../../dist/app-drupal/assets/form_group.css: {}
+  js:
+    ../../dist/app-drupal/assets/form_group.js: {}
+  dependencies:
+    - particle/core
+grid:
+  version: 1.x
+  css:
+    theme:
+      ../../dist/app-drupal/assets/grid.css: {}
+  js:
+    ../../dist/app-drupal/assets/grid.js: {}
+  dependencies:
+    - particle/core
+icon:
+  version: 1.x
+  css:
+    theme:
+      ../../dist/app-drupal/assets/icon.css: {}
+  js:
+    ../../dist/app-drupal/assets/icon.js: {}
+  dependencies:
+    - particle/core
+image:
+  version: 1.x
+  css:
+    theme:
+      ../../dist/app-drupal/assets/image.css: {}
+  js:
+    ../../dist/app-drupal/assets/image.js: {}
+  dependencies:
+    - particle/core
+image_text:
+  version: 1.x
+  css:
+    theme:
+      ../../dist/app-drupal/assets/image_text.css: {}
+  js:
+    ../../dist/app-drupal/assets/image_text.js: {}
+  dependencies:
+    - particle/core
+input:
+  version: 1.x
+  css:
+    theme:
+      ../../dist/app-drupal/assets/input.css: {}
+  js:
+    ../../dist/app-drupal/assets/input.js: {}
+  dependencies:
+    - particle/core
+jquery:
+  version: 1.x
+  js:
+    ../../dist/app-drupal/assets/jquery.js:
+      minified: true
+      weight: -20
+  dependencies:
+    - particle/core
+lightbox:
+  version: 1.x
+  css:
+    theme:
+      ../../dist/app-drupal/assets/lightbox.css: {}
+  js:
+    ../../dist/app-drupal/assets/lightbox.js: {}
+  dependencies:
+    - particle/core
+menu:
+  version: 1.x
+  css:
+    theme:
+      ../../dist/app-drupal/assets/menu.css: {}
+  js:
+    ../../dist/app-drupal/assets/menu.js: {}
+  dependencies:
+    - particle/core
+nav:
+  version: 1.x
+  css:
+    theme:
+      ../../dist/app-drupal/assets/nav.css: {}
+  js:
+    ../../dist/app-drupal/assets/nav.js: {}
+  dependencies:
+    - particle/core
+navbar:
+  version: 1.x
+  css:
+    theme:
+      ../../dist/app-drupal/assets/navbar.css: {}
+  js:
+    ../../dist/app-drupal/assets/navbar.js: {}
+  dependencies:
+    - particle/core
+newsletter_signup:
+  version: 1.x
+  css:
+    theme:
+      ../../dist/app-drupal/assets/newsletter_signup.css: {}
+  js:
+    ../../dist/app-drupal/assets/newsletter_signup.js: {}
+  dependencies:
+    - particle/core
+overlay:
+  version: 1.x
+  css:
+    theme:
+      ../../dist/app-drupal/assets/overlay.css: {}
+  js:
+    ../../dist/app-drupal/assets/overlay.js: {}
+  dependencies:
+    - particle/core
+pagination:
+  version: 1.x
+  css:
+    theme:
+      ../../dist/app-drupal/assets/pagination.css: {}
+  js:
+    ../../dist/app-drupal/assets/pagination.js: {}
+  dependencies:
+    - particle/core
+protons:
+  version: 1.x
+  css:
+    theme:
+      ../../dist/app-drupal/assets/protons.css:
+        weight: -50
+  js:
+    ../../dist/app-drupal/assets/protons.js: {}
+  dependencies:
+    - particle/core
+section:
+  version: 1.x
+  css:
+    theme:
+      ../../dist/app-drupal/assets/section.css: {}
+  js:
+    ../../dist/app-drupal/assets/section.js: {}
+  dependencies:
+    - particle/core
+sidebar:
+  version: 1.x
+  css:
+    theme:
+      ../../dist/app-drupal/assets/sidebar.css: {}
+  js:
+    ../../dist/app-drupal/assets/sidebar.js: {}
+  dependencies:
+    - particle/core
+svg:
+  version: 1.x
+  css:
+    theme:
+      ../../dist/app-drupal/assets/svg.css: {}
+  js:
+    ../../dist/app-drupal/assets/svg.js: {}
+  dependencies:
+    - particle/core
+temporary:
+  version: 1.x
+  css:
+    theme:
+      ../../dist/app-drupal/assets/temporary.css:
+        weight: 100
+  js:
+    ../../dist/app-drupal/assets/temporary.js: {}
+  dependencies:
+    - particle/core
+test:
+  version: 1.x
+  css:
+    theme:
+      ../../dist/app-drupal/assets/test.css: {}
+  js:
+    ../../dist/app-drupal/assets/test.js: {}
+  dependencies:
+    - particle/core
+text:
+  version: 1.x
+  css:
+    theme:
+      ../../dist/app-drupal/assets/text.css: {}
+  js:
+    ../../dist/app-drupal/assets/text.js: {}
+  dependencies:
+    - particle/core
+vue_widget:
+  version: 1.x
+  css:
+    theme:
+      ../../dist/app-drupal/assets/vue_widget.css: {}
+  js:
+    ../../dist/app-drupal/assets/vue_widget.js: {}
+  dependencies:
+    - particle/core
+core:
+  dependencies:
+    - core/drupal
+    - core/drupalSettings
+    - particle/runtime
+    - particle/vendor

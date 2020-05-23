@@ -1,0 +1,79 @@
+{#
+/**
+ * @file Navbar!
+ * Documenting Navbar Examples from Bootstrap.
+ *
+ * Available variables:
+ * - navbar_classes: Array: The html classes for the navbar.
+ * - navbar_other_classes: Array: The classes from YAML to merge into navbar_classes.
+ * - navbar.arialebelledby: String: The aria labelled by value.
+ * - navbar.attributes: Array: Attributes for the Navbar.
+ * - navbar.brand_link: String: The URL the brand text will link to.
+ * - navbar.brand_text: String: The text of the brand.
+ * - navbar.id: String: The html id for the navbar.
+ *
+ * @see https://getbootstrap.com/docs/4.0/components/navbar/
+ */
+#}
+
+{% set navbar_attributes = {
+  'class': [
+    'navbar',
+    'navbar-expand-md',
+    'navbar--center',
+  ],
+  'role': 'navigation',
+} | merge(navbar_other_attributes|default({})) | remove_empty %}
+
+<nav {{ add_attributes(navbar_attributes) }}>
+
+  {% block navbar_brand %}
+    {% include "@atoms/branding/_branding.twig" with {
+      url: '#',
+      logo_svg_inline: '@atoms/branding/logo.svg',
+      site_name: '1xdx - Times',
+    } %}
+  {% endblock navbar_brand %}
+
+  {# search overlay button #}
+  <a href="#" class="js-overlay-open overlay-toggle d-flex pr-3 pr-md-0 order-0 order-md-11 ml-auto" aria-label="Search" title="Search" role="button">
+    {% include '@atoms/icon/_icon.twig' with {
+      icon_name: 'search'
+    } %}
+  </a>
+
+  {# collapse button #}
+  {% set button_text %}
+    {{ '<span class="navbar-toggler-icon"></span>' }}
+  {% endset %}
+  {% include '@atoms/button/_button.twig' with {
+    button_color: 'none',
+    button_other_classes: [
+      'navbar-toggler',
+      'order-1',
+      'order-md-12',
+    ],
+    button_toggle: 'collapse',
+    button_element: 'button',
+    button_other_attributes: {
+      'data-target': '#primary-menu',
+      'aria-controls': 'primary-menu',
+      'aria-expanded': false,
+      'aria-label': 'Toggle navigation',
+    },
+    button_text: button_text,
+  } %}
+
+  {# navbar #}
+  <div class="collapse navbar-collapse navbar--main navbar--center px-md-6 pt-2 pt-md-0 order-2" id="primary-menu">
+    {% block navbar_content %}
+      {% include '@molecules/nav/_nav.twig' with {
+          nav_element: 'ul',
+          nav_other_classes: [
+            'navbar-nav',
+          ],
+          nav_items: navbar.items,
+        } %}
+    {% endblock navbar_content %}
+  </div>
+</nav>

@@ -1,0 +1,59 @@
+/*
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+Bootstrap's CSS-generating output
+--------------------------------------------------------------------------------
+This is the exact order within:
+  ~bootstrap/scss/bootstrap
+
+Override all Bootstrap variables at:
+  ~tokens/sass/non-printing/_bootstrap-overrides
+
+Comment out unused Bootstrap components.
+--------------------------------------------------------------------------------
+*/
+
+//@import "~bootstrap/scss/functions"; //_bootstrap-overrides.scss
+//@import "~bootstrap/scss/variables"; //_bootstrap-overrides.scss
+//@import "~bootstrap/scss/mixins"; //_bootstrap-overrides.scss
+
+// Core bootstrap code
+@import '~bootstrap/scss/root';
+@import '~bootstrap/scss/reboot';
+@import '~bootstrap/scss/type';
+@import '~bootstrap/scss/images';
+@import '~bootstrap/scss/grid';
+@import '~bootstrap/scss/utilities';
+@import '~bootstrap/scss/print';
+
+// Custom forms is a big file which contains styling for custom selects, custom
+// check and radio boxes and custom files that's why we're keeping this here for
+// now until we figure out how to split this up.
+@import '~bootstrap/scss/custom-forms';
+
+// Component code which is included in the respective pattern's SCSS.
+//@import '~bootstrap/scss/alert';
+//@import '~bootstrap/scss/badge';
+//@import '~bootstrap/scss/breadcrumb';
+//@import '~bootstrap/scss/buttons';
+//@import '~bootstrap/scss/dropdown';
+//@import '~bootstrap/scss/forms';
+//@import '~bootstrap/scss/input-group';
+//@import '~bootstrap/scss/button-group';
+//@import '~bootstrap/scss/nav';
+//@import '~bootstrap/scss/navbar';
+//@import '~bootstrap/scss/card';
+//@import '~bootstrap/scss/pagination';
+//@import '~bootstrap/scss/carousel';
+
+// Potentially optional code which could be commented/removed depending on the
+// scenario.
+@import '~bootstrap/scss/transitions';
+@import '~bootstrap/scss/progress';
+@import '~bootstrap/scss/media';
+@import '~bootstrap/scss/close';
+@import '~bootstrap/scss/modal';
+@import '~bootstrap/scss/tooltip';
+@import '~bootstrap/scss/popover';
+@import '~bootstrap/scss/code';
+@import '~bootstrap/scss/tables';

@@ -1,0 +1,41 @@
+{#
+  Form-group!
+
+  form_group_label: String: The label value of the form group.
+  form_group_id: String: The ID of the input element, used to associate the label with it.
+  form_group_content: String: The content of the form group.
+  form_group_description: String: The description/help text rendered below the content.
+  form_group_description_type: undefined|valid|invalid
+
+  See https://getbootstrap.com/docs/4.0/components/forms/ for more details.
+#}
+
+{% set form_group_classes = [
+  'form-group'
+] | merge(form_group_other_classes|default([])) | remove_empty %}
+
+{% set form_group_attributes = {
+  'class': form_group_classes,
+} | merge(form_group_other_attributes|default({})) | remove_empty %}
+
+{% set label_classes = [
+  'form-group__label'
+  ] | merge(label_other_classes|default([])) | remove_empty %}
+  
+  {% set label_attributes = {
+    'class': label_classes,
+  } | merge(label_other_attributes|default({})) | remove_empty %}
+
+<div {{ add_attributes(form_group_attributes) }}>
+  {% if form_group_label %}
+    <label for="{{ form_group_id }}" {{ add_attributes(label_attributes) }}>{{ form_group_label }}</label>
+  {% endif %}
+  {% block content %}
+    {{ form_group_content }}
+  {% endblock %}
+  {% if form_group_description %}
+    <small class="form-text {{ form_group_description_type ? form_group_description_type ~ '-feedback' : 'text-muted' }}">
+      {{ form_group_description }}
+    </small>
+  {% endif %}
+</div>
