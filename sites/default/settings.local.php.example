@@ -1,0 +1,43 @@
+<?php
+
+$config['system.logging']['error_level'] = 'verbose';
+
+// Set this to TRUE or comment out in production
+$config['system.performance']['css']['preprocess'] = FALSE;
+$config['system.performance']['js']['preprocess'] = FALSE;
+
+// Drupal < 8.7
+$config_directories['sync'] = $app_root . '/../config/sync';
+
+// Drupal >= 8.8
+$settings['config_sync_directory'] = $app_root . '/../config/sync';
+
+$settings['trusted_host_patterns'] = [
+  '^.+\.hosting\.1xinternet\.de$',
+  '^.+\.ddev\.site$'
+];
+
+// Configuration split
+# $config['config_split.config_split.test']['status']  = FALSE;
+# $config['config_split.config_split.stage']['status'] = FALSE;
+# $config['config_split.config_split.live']['status']  = FALSE;
+
+// Environment indicator
+// name  fg_color bg_color
+// local #ffffff  #000000
+// dev   #ffffff  #5a5a5a
+// test  #4d7750  #1dea59
+// stage #642828  #f3f200
+// live  #acf9ff  #ff0000
+$config['environment_indicator.indicator']['fg_color'] = '#ffffff';
+$config['environment_indicator.indicator']['bg_color'] = '#000000';
+$config['environment_indicator.indicator']['name'] = 'local';
+
+// Elasticsearch settings
+# $config['elasticsearch_helper.settings']['elasticsearch_helper']['host'] = 'elasticsearch';
+# $config['elasticsearch_helper.settings']['elasticsearch_helper']['port'] = '9200';
+
+// Solr settings
+// Make sure to replace REPLACEME with the server-id and remove this comment line.
+# $config['search_api.server.REPLACEME']['backend_config']['connector_config']['host'] = 'solr';
+# $config['search_api.server.REPLACEME']['backend_config']['connector_config']['port'] = '8983';
