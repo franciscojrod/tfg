@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\xi_paragraphs\Plugin\Field\FieldType;
+namespace Drupal\tfg_paragraphs\Plugin\Field\FieldType;
 
 
 use Drupal\viewsreference\Plugin\Field\FieldType\ViewsReferenceItem;
@@ -12,7 +12,7 @@ use Drupal\viewsreference\Plugin\Field\FieldType\ViewsReferenceItem;
  * additional information in field value to store page limit,
  * view mode and multiple arguments.
  *
- * @package Drupal\xi_paragraphs\Plugin\Field\FieldType
+ * @package Drupal\tfg_paragraphs\Plugin\Field\FieldType
  */
 class ViewsReferenceOverride extends ViewsReferenceItem {
 

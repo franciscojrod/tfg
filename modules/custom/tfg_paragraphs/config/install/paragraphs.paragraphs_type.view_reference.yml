@@ -2,7 +2,7 @@ langcode: en
 status: true
 dependencies:
   module:
-    - xi_paragraphs
+    - tfg_paragraphs
 id: view_reference
 label: 'View reference'
 icon_uuid: null

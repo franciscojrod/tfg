@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\xi_paragraphs\Plugin\paragraphs\Behavior;
+namespace Drupal\tfg_paragraphs\Plugin\paragraphs\Behavior;
 
 use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
 use Drupal\Core\Form\FormStateInterface;

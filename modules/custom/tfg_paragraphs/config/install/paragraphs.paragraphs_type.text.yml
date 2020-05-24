@@ -2,7 +2,7 @@ langcode: en
 status: true
 dependencies:
   module:
-    - xi_paragraphs
+    - tfg_paragraphs
 id: text
 label: Text
 icon_uuid: null

@@ -1,7 +1,7 @@
 status: true
 dependencies:
   module:
-    - xi_paragraphs
+    - tfg_paragraphs
 id: image_text
 label: 'Image Text'
 icon_uuid: null

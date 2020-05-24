@@ -11,7 +11,6 @@ dependencies:
   - entity_reference_display
   - entity_reference_revisions
   - field
-  - xi_media
   - node
   - options
   - paragraphs
@@ -20,4 +19,4 @@ dependencies:
   - viewsreference
 
 libraries:
-  - 'xi_paragraphs/slick'
+  - 'tfg_paragraphs/slick'

@@ -7,5 +7,5 @@ dependencies:
   - drupal:taxonomy
   - simple_sitemap:simple_sitemap
   - drupal:single_datetime
-  - xi_profile:xi_content_types
-  - xi_profile:xi_media
+  - tfg_profile:tfg_content_types
+  - tfg_profile:tfg_media

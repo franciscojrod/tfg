@@ -1,4 +1,4 @@
-xi_paragraphs.ajax_entity_view_modes:
+tfg_paragraphs.ajax_entity_view_modes:
   path: '/ajax-entity-view-modes/{entity_type}/{entity_id}'
   defaults:
     _controller: '\Drupal\paragraphs\Controller\AjaxEntityController::getEntityViewModes'

@@ -5,6 +5,4 @@ core: 8.x
 package: TFG
 dependencies:
   - drupal:node
-  - xi_profile:xi_basic_settings
-  - xi_profile:xi_paragraphs
-  - xi_profile:xi_form_validation
+  - tfg_paragraphs

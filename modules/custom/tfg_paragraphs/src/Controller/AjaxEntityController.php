@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\xi_paragraphs\Controller;
+namespace Drupal\tfg_paragraphs\Controller;
 
 use Drupal\Core\Entity\Controller\EntityController;
 use Drupal\Core\Entity\EntityInterface;

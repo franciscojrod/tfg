@@ -3,10 +3,10 @@
 /**
  * Implements hook_field_info_alter().
  */
-function xi_paragraphs_field_info_alter(&$info) {
+function tfg_paragraphs_field_info_alter(&$info) {
   // Change the class for viewsreference field type.
   if (isset($info['viewsreference'])) {
-    $info['viewsreference']['class'] = 'Drupal\xi_paragraphs\Plugin\Field\FieldType\ViewsReferenceOverride';
+    $info['viewsreference']['class'] = 'Drupal\tfg_paragraphs\Plugin\Field\FieldType\ViewsReferenceOverride';
   }
 }
 
@@ -36,7 +36,7 @@ function _views_selector_get_state_name($dependee, $element, $field_definition) 
  *
  * @return array
  */
-function _xi_paragraphs_views_argument_getter(array &$form, \Drupal\Core\Form\FormStateInterface $form_state) {
+function _tfg_paragraphs_views_argument_getter(array &$form, \Drupal\Core\Form\FormStateInterface $form_state) {
   $trigger = $form_state->getTriggeringElement();
   $parents = $trigger['#array_parents'];
   $triggered_element = array_pop($parents);
@@ -75,7 +75,7 @@ function _views_argument_field_info($argument) {
 /**
  * Implements hook_field_widget_form_alter().
  */
-function xi_paragraphs_field_widget_form_alter(&$element, \Drupal\Core\Form\FormStateInterface $form_state, $context) {
+function tfg_paragraphs_field_widget_form_alter(&$element, \Drupal\Core\Form\FormStateInterface $form_state, $context) {
   /** @var \Drupal\Core\Field\EntityReferenceFieldItemList $items */
   $items = $context['items'];
   // Get the field definition.
@@ -92,7 +92,7 @@ function xi_paragraphs_field_widget_form_alter(&$element, \Drupal\Core\Form\Form
         'type' => 'throbber',
         'message' => t('Loading view details ...'),
       ],
-      'callback' => '_xi_paragraphs_views_argument_getter',
+      'callback' => '_tfg_paragraphs_views_argument_getter',
       'wrapper' => $arguments_wrapper_selector,
       'method' => 'replace',
     ];
@@ -251,7 +251,7 @@ function xi_paragraphs_field_widget_form_alter(&$element, \Drupal\Core\Form\Form
   $widget = $context['widget'];
   // Add the view_mode_selector library on every image paragraph.
   if ($widget->getPluginId() == 'paragraphs' && !empty($element['subform']['field_image'])) {
-    $element['#attached']['library'][] = 'xi_paragraphs/view_mode_selector';
+    $element['#attached']['library'][] = 'tfg_paragraphs/view_mode_selector';
     $field_name = _selector_get_state_name($element['subform']['field_image']['widget']);
     $element['subform']['field_view_mode']['widget']['#states'] = [
       'visible' => [
@@ -266,7 +266,7 @@ function xi_paragraphs_field_widget_form_alter(&$element, \Drupal\Core\Form\Form
     if ($formObject instanceof \Drupal\paragraphs_edit\Form\ParagraphEditForm) {
       $paragraph = $formObject->getEntity();
       if ($paragraph->bundle() == 'media_reference') {
-        $element['#attached']['library'][] = 'xi_paragraphs/view_mode_selector';
+        $element['#attached']['library'][] = 'tfg_paragraphs/view_mode_selector';
       }
     }
   }
@@ -286,9 +286,9 @@ function _selector_get_state_name($element) {
   return $start . '[' . implode('][', $selector) . ']';
 }
 
-function xi_paragraphs_preprocess_paragraph(&$variables) {
+function tfg_paragraphs_preprocess_paragraph(&$variables) {
   if($variables['paragraph']->getType() == 'gallery') {
-    $variables['#attached']['library'][] = 'xi_paragraphs/photoswipe';
+    $variables['#attached']['library'][] = 'tfg_paragraphs/photoswipe';
   }
 }
 
@@ -306,7 +306,7 @@ function xi_paragraphs_preprocess_paragraph(&$variables) {
  *
  * @throws \Drupal\Core\Entity\EntityStorageException
  */
-function xi_paragraphs_add_enabled_bundles($entity_type_id, $bundle, $field_name, $bundle_to_add) {
+function tfg_paragraphs_add_enabled_bundles($entity_type_id, $bundle, $field_name, $bundle_to_add) {
   // Load page reference field.
   $field_config = \Drupal\field\Entity\FieldConfig::loadByName($entity_type_id, $bundle, $field_name);
   if (!empty($field_config) && $field_config->getType() == 'entity_reference_revisions') {
@@ -329,13 +329,13 @@ function xi_paragraphs_add_enabled_bundles($entity_type_id, $bundle, $field_name
 /**
  * Implements hook_preprocess_field().
  */
-function xi_paragraphs_preprocess_field(&$variables) {
+function tfg_paragraphs_preprocess_field(&$variables) {
   $entity = $variables['element']['#items']->getEntity();
   if ($entity instanceof \Drupal\paragraphs\ParagraphInterface) {
     // Check if paragraph has layout behaviour.
     $layout = $entity->getBehaviorSetting('paragraph_teaser_layout', 'teaser_layout');
     if ($layout) {
-      \Drupal\xi_paragraphs\Plugin\paragraphs\Behavior\ParagraphsLayoutPlugin::populateVariables($variables, $layout);
+      \Drupal\tfg_paragraphs\Plugin\paragraphs\Behavior\ParagraphsLayoutPlugin::populateVariables($variables, $layout);
     }
     if ($variables['field_name'] == 'field_media') {
       if ($entity->bundle() == 'gallery') {

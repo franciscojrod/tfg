@@ -4,4 +4,4 @@ type: module
 core: 8.x
 package: TFG
 dependencies:
-  - xi_profile:xi_paragraphs
+  - tfg_profile:tfg_paragraphs
