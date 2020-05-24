@@ -14,9 +14,9 @@
 <div class="image-text row align-items-center">
   <div class="col-md-4 offset-md-2 m-md-auto pt-3 pt-md-0">
     {% if title %}
-      <h3 class="image-text__title text-center text-dark">{{ title }}</h3>
+      <h3 class="image-text__title text-center">{{ title }}</h3>
     {% endif %}
-    <div class="image-text__text text-dark">{{ text }}</div>
+    <div class="image-text__text">{{ text }}</div>
   </div>
   <div class="col-md-6 image-text__image {% if image_position == 'image_left' %} order-first{% endif %}">
     {% block image %}
