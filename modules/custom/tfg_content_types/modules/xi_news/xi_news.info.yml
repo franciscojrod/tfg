@@ -1,0 +1,11 @@
+name: 'TFG Content Type - News'
+description: 'Contains the news content type definition'
+type: module
+core: 8.x
+package: TFG
+dependencies:
+  - drupal:taxonomy
+  - simple_sitemap:simple_sitemap
+  - drupal:single_datetime
+  - xi_profile:xi_content_types
+  - xi_profile:xi_media

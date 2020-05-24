@@ -1,0 +1,135 @@
+<?php
+
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Url;
+
+/**
+ * Implements hook_form_alter().
+ */
+function xi_content_types_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  // Adds field group hide functionality based on the sidebar selection field.
+  if (!empty($form['field_show_sidebar'])) {
+    $form['#attached']['library'][] = 'xi_content_types/field_group_states';
+  }
+}
+
+/**
+ * Add 'Add Redirect' link to node form.
+ *
+ * @param $form
+ * @param FormStateInterface $form_state
+ * @param $form_id
+ */
+function xi_content_types_form_node_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  if (!empty($form['url_redirects'])) {
+    /** @var \Drupal\node\NodeInterface $node */
+    $node = $form_state->getFormObject()->getEntity();
+    $form['url_redirects']['add_new'] = [
+      '#type' => 'link',
+      '#title' => t('Add Redirect'),
+      '#attributes' => ['class' => ['button']],
+      '#url' => Url::fromRoute('redirect.add', [], ['attributes' => ['target' => '_blank'], 'query' => ['redirect' => '/node/' . $node->id()]]),
+    ];
+  }
+}
+
+/**
+ * The list of paragraphs enabled per field.
+ *
+ * We use the same fields for every content type.
+ *
+ * @return array
+ */
+function xi_content_types_default_enabled_paragraphs() {
+  return [
+    'field_header_paragraphs' => [
+      'slideshow',
+      'image',
+    ],
+    'field_content_paragraphs' => [
+      'text',
+      'image',
+      'image_text',
+      'video',
+      'view_reference',
+      'accordion',
+      'slideshow',
+    ],
+  ];
+}
+
+/**
+ * Enable the default paragraph types for node fields.
+ *
+ * @param $node_bundle
+ * @param bool $paragraph_type
+ */
+function xi_content_types_enable_default_paragraph_for_fields($node_bundle, $paragraph_type = FALSE) {
+  $paragraphs = xi_content_types_default_enabled_paragraphs();
+  // Add all allowed bundles to the field config.
+  foreach ($paragraphs as $field_name => $allowed_types) {
+    foreach ($allowed_types as $bundle) {
+      // If we intend to install only 1 paragraph bundle.
+      if ($paragraph_type !== FALSE) {
+        if ($paragraph_type != $bundle) {
+          continue;
+        }
+      }
+      try {
+        $type = \Drupal::entityTypeManager()
+          ->getStorage('paragraphs_type')
+          ->load($bundle);
+        if ($type) {
+          xi_paragraphs_add_enabled_bundles('node', $node_bundle, $field_name, $bundle);
+        }
+      } catch (\Drupal\Core\Entity\EntityStorageException $e) {
+        \Drupal::logger('xi_paragraphs')->error($e->getMessage());
+      } catch (\Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException $e) {
+        \Drupal::logger('xi_paragraphs')->error($e->getMessage());
+      } catch (\Drupal\Component\Plugin\Exception\PluginNotFoundException $e) {
+        \Drupal::logger('xi_paragraphs')->error($e->getMessage());
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_entity_bundle_create().
+ */
+function xi_content_types_entity_bundle_create($entity_type_id, $bundle) {
+  if ($entity_type_id == 'paragraph') {
+    // Load all node types.
+    $node_types = \Drupal::entityTypeManager()->getStorage('node_type')->loadMultiple();
+    foreach ($node_types as $node_type) {
+      // Try to install the all fields and each node type.
+      xi_content_types_enable_default_paragraph_for_fields($node_type->id(), $bundle);
+    }
+  }
+}
+
+/**
+ * Implements hook_site_install_finished().
+ */
+function xi_content_types_site_install_finished($install_state) {
+  // Make sure that all paragraph types are enabled for the fields.
+  // It is not possible to make sure that this happens during the installion
+  // process because the caches might be still empty and wrong info about
+  // dependencies is served to the installer.
+
+  // Load all node types.
+  $node_types = \Drupal::entityTypeManager()->getStorage('node_type')->loadMultiple();
+  foreach ($node_types as $node_type) {
+    // Try to install the all fields and each node type.
+    xi_content_types_enable_default_paragraph_for_fields($node_type->id());
+  }
+}
+
+/**
+ * Implements hook_field_group_form_process_alter().
+ */
+function xi_content_types_field_group_form_process_alter(array &$element, &$group, &$complete_form) {
+  if (strpos($complete_form['#form_id'], '_edit_form') === FALSE && isset($complete_form['#group_children']['group_preview'])) {
+    $element['#open'] = ($element['#group_name'] == 'group_preview');
+    $group->format_settings['formatter'] = $element['#group_name'] == 'group_preview' ? 'open' : 'closed';
+  }
+}

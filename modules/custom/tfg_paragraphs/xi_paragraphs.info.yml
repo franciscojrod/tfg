@@ -1,0 +1,23 @@
+name: 'XI Paragraphs'
+description: 'Contains default defined paragraphs'
+type: module
+core: 8.x
+package: TFG
+dependencies:
+  - block
+  - block_field
+  - dropzonejs_eb_widget
+  - entity_browser
+  - entity_reference_display
+  - entity_reference_revisions
+  - field
+  - xi_media
+  - node
+  - options
+  - paragraphs
+  - text
+  - views
+  - viewsreference
+
+libraries:
+  - 'xi_paragraphs/slick'

@@ -1,0 +1,17 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - xi_paragraphs
+id: view_reference
+label: 'View reference'
+icon_uuid: null
+description: ''
+behavior_plugins:
+  paragraph_width:
+    enabled: true
+    default_width: wide
+    options:
+      full: Full
+      wide: Wide
+      narrow: Narrow

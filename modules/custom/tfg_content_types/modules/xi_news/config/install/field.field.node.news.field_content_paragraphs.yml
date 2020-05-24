@@ -1,0 +1,78 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_content_paragraphs
+    - node.type.news
+    - paragraphs.paragraphs_type.block_reference
+    - paragraphs.paragraphs_type.gallery
+    - paragraphs.paragraphs_type.image
+    - paragraphs.paragraphs_type.page_reference
+    - paragraphs.paragraphs_type.slideshow
+    - paragraphs.paragraphs_type.text
+    - paragraphs.paragraphs_type.two_columns
+  module:
+    - entity_reference_revisions
+id: node.news.field_content_paragraphs
+field_name: field_content_paragraphs
+entity_type: node
+bundle: news
+label: 'Content Paragraphs'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      text: text
+      image: image
+      file: file
+      video: video
+      remote_video: remote_video
+      gallery: gallery
+      slideshow: slideshow
+      block_reference: block_reference
+      page_reference: page_reference
+      two_columns: two_columns
+    target_bundles_drag_drop:
+      text:
+        enabled: true
+        weight: -21
+      image:
+        enabled: true
+        weight: -20
+      file:
+        enabled: true
+        weight: -20
+      video:
+        enabled: true
+        weight: -20
+      remote_video:
+        enabled: true
+        weight: -20
+      gallery:
+        enabled: true
+        weight: -18
+      slideshow:
+        enabled: true
+        weight: -17
+      block_reference:
+        enabled: true
+        weight: -16
+      page_reference:
+        enabled: true
+        weight: -15
+      two_columns:
+        enabled: true
+        weight: -14
+      view_reference:
+        weight: -13
+        enabled: false
+      slide:
+        weight: -12
+        enabled: false
+field_type: entity_reference_revisions

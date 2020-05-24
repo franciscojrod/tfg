@@ -1,0 +1,68 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_sidebar_paragraphs
+    - node.type.news
+    - paragraphs.paragraphs_type.block_reference
+    - paragraphs.paragraphs_type.page_reference
+    - paragraphs.paragraphs_type.text
+  module:
+    - entity_reference_revisions
+id: node.news.field_sidebar_paragraphs
+field_name: field_sidebar_paragraphs
+entity_type: node
+bundle: news
+label: 'Sidebar Paragraphs'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      text: text
+      image: image
+      file: file
+      video: video
+      remote_video: remote_video
+      block_reference: block_reference
+      page_reference: page_reference
+    target_bundles_drag_drop:
+      text:
+        enabled: true
+        weight: -19
+      image:
+        enabled: true
+        weight: -20
+      file:
+        enabled: true
+        weight: -20
+      video:
+        enabled: true
+        weight: -20
+      remote_video:
+        enabled: true
+        weight: -20
+      block_reference:
+        enabled: true
+        weight: -17
+      page_reference:
+        enabled: true
+        weight: -16
+      gallery:
+        weight: -15
+        enabled: false
+      slideshow:
+        weight: -14
+        enabled: false
+      two_columns:
+        weight: -12
+        enabled: false
+      view_reference:
+        weight: -11
+        enabled: false
+field_type: entity_reference_revisions

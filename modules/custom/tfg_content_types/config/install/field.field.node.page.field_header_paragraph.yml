@@ -1,0 +1,47 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_header_paragraph
+    - node.type.page
+    - paragraphs.paragraphs_type.image
+    - paragraphs.paragraphs_type.slideshow
+  module:
+    - entity_reference_revisions
+id: node.page.field_header_paragraph
+field_name: field_header_paragraph
+entity_type: node
+bundle: page
+label: 'Header Paragraph'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      image: image
+      slideshow: slideshow
+    target_bundles_drag_drop:
+      gallery:
+        weight: 12
+        enabled: false
+      image:
+        enabled: true
+        weight: 13
+      slide:
+        weight: 16
+        enabled: false
+      slideshow:
+        enabled: true
+        weight: 17
+      text:
+        weight: 18
+        enabled: false
+      view_reference:
+        weight: 20
+        enabled: false
+field_type: entity_reference_revisions

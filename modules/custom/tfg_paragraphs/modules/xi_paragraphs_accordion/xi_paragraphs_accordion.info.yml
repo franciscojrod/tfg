@@ -1,0 +1,7 @@
+name: 'XI Paragraphs - Accordion'
+description: 'Contains the accordion paragraph type definition'
+type: module
+core: 8.x
+package: TFG
+dependencies:
+  - xi_profile:xi_paragraphs

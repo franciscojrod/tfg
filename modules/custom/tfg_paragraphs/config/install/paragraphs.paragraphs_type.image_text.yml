@@ -1,0 +1,32 @@
+status: true
+dependencies:
+  module:
+    - xi_paragraphs
+id: image_text
+label: 'Image Text'
+icon_uuid: null
+description: ''
+behavior_plugins:
+  paragraph_image_position:
+    enabled: true
+    default_image_position: image_left
+    options:
+      image_left: Left
+      image_right: Right
+    excluded_fields: ''
+  paragraph_theme:
+    enabled: true
+    default_theme: ''
+    options:
+      '': none
+      dark: Dark
+      light: Light
+    excluded_fields: {  }
+  paragraph_width:
+    enabled: true
+    default_width: Wide
+    options:
+      full: Full
+      wide: Wide
+      narrow: Narrow
+    excluded_fields: {  }

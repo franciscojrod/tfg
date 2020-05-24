@@ -1,0 +1,358 @@
+<?php
+
+/**
+ * Implements hook_field_info_alter().
+ */
+function xi_paragraphs_field_info_alter(&$info) {
+  // Change the class for viewsreference field type.
+  if (isset($info['viewsreference'])) {
+    $info['viewsreference']['class'] = 'Drupal\xi_paragraphs\Plugin\Field\FieldType\ViewsReferenceOverride';
+  }
+}
+
+/**
+ * Get the correct nested form element name.
+ *
+ * @param $dependee
+ * @param $element
+ * @param $field_definition
+ *
+ * @return string
+ */
+function _views_selector_get_state_name($dependee, $element, $field_definition) {
+  $selector = $element['target_id']['#field_parents'];
+  $selector[] = $field_definition->get('field_name');
+  $selector[] = '0';
+  $selector[] = $dependee;
+  $start = array_shift($selector);
+  return $start . '[' . implode('][', $selector) . ']';
+}
+
+/**
+ * Returns the field value on ajax callback event change.
+ *
+ * @param array $form
+ * @param \Drupal\Core\Form\FormStateInterface $form_state
+ *
+ * @return array
+ */
+function _xi_paragraphs_views_argument_getter(array &$form, \Drupal\Core\Form\FormStateInterface $form_state) {
+  $trigger = $form_state->getTriggeringElement();
+  $parents = $trigger['#array_parents'];
+  $triggered_element = array_pop($parents);
+  $parents[] = 'options';
+  return \Drupal\Component\Utility\NestedArray::getValue($form, $parents);
+}
+
+/**
+ * Retrieves the field info by given contextual filter.
+ *
+ * @param $argument
+ *
+ * @return array
+ */
+function _views_argument_field_info($argument) {
+  $info = FALSE;
+  if (!empty($argument['table'])) {
+    $keys = explode('__', $argument['table']);
+    if (!empty($keys)) {
+      $info = \Drupal\field\Entity\FieldStorageConfig::loadByName($keys[0], $keys[1]);
+      // if it is entity reference field try to get the target type and selector settings
+      if ($info && $info->getType() == 'entity_reference') {
+        $bundles = $info->getBundles();
+        $bundles_machine_names = array_keys($bundles);
+        $bundle_info = \Drupal\field\Entity\FieldConfig::loadByName($keys[0], $bundles_machine_names[0], $keys[1]);
+      }
+      else {
+        $bundle_info = [];
+      }
+    }
+  }
+
+  return ['info' => $info, 'bundle_info' => $bundle_info];
+}
+
+/**
+ * Implements hook_field_widget_form_alter().
+ */
+function xi_paragraphs_field_widget_form_alter(&$element, \Drupal\Core\Form\FormStateInterface $form_state, $context) {
+  /** @var \Drupal\Core\Field\EntityReferenceFieldItemList $items */
+  $items = $context['items'];
+  // Get the field definition.
+  $field_definition = $items->getFieldDefinition();
+  if ($field_definition->getType() == 'viewsreference') {
+    // Create the selector for the arguments fields for the ajax response.
+    $arguments_wrapper_selector = implode('_', $element['target_id']['#field_parents']) . '_arguments';
+    $arguments_weight = !empty($element['options']['argument']['#weight']) ? $element['options']['argument']['#weight'] : 10;
+    // Add empty option and ajax callback for the display_id field.
+    $element['display_id']['#options'] = ['_none' => t('-- Choose view display --')] + $element['display_id']['#options'];
+    $element['display_id']['#ajax'] = [
+      'event' => 'change',
+      'progress' => [
+        'type' => 'throbber',
+        'message' => t('Loading view details ...'),
+      ],
+      'callback' => '_xi_paragraphs_views_argument_getter',
+      'wrapper' => $arguments_wrapper_selector,
+      'method' => 'replace',
+    ];
+    $element['target_id']['#attributes']['class'][] = 'viewreference_target_id';
+    $element['display_id']['#attributes']['class'][] = 'viewreference_display_id';
+    // Get arguments states to set them to entity reference field too.
+    $argument_states = $element['options']['argument']['#states'];
+    // Get extra data from serialized field.
+    $extra_data = [];
+    $values = $items->getValue();
+    if (!empty($values[0]['data'])) {
+      $extra_data = unserialize($values[0]['data']);
+    }
+    $element['page_limit'] = [
+      '#type' => 'number',
+      '#title' => t('Page limit'),
+      '#default_value' => !empty($extra_data['page_limit']) ? $extra_data['page_limit'] : '',
+      '#weight' => 10,
+    ];
+    $element['argument'] = [
+      '#tree' => TRUE,
+      '0' => $element['options']['argument'],
+    ];
+    $entity_type = 'node';
+    if (!empty($values[0]['target_id'])) {
+      /** @var \Drupal\views\Entity\View $view */
+      $view = \Drupal\views\Entity\View::load($values[0]['target_id']);
+      $entity_type = $view->getExecutable()->getBaseEntityType()->id();
+      $display_id = 'default';
+      if (!empty($values[0]['display_id']) && $values[0]['display_id'] != '_none') {
+        $display_id = $values[0]['display_id'];
+      }
+      // Get the view display.
+      $display = $view->getDisplay($display_id);
+      // Contexual arguments if they are not overriden are set only in default.
+      if (empty($display['display_options']['arguments'])) {
+        // If no arguments found try to get the ones from default display.
+        $display = $view->getDisplay('default');
+      }
+      $argument_values = explode('/', $values[0]['argument']);
+      if (!empty($display['display_options']['arguments'])) {
+        $num = 0;
+        foreach ($display['display_options']['arguments'] as $argument_name => $argument_value) {
+          $title_extra = '';
+          if ($argument_value['not']) {
+            $title_extra = ' (' . t('Exclude this items') . ')';
+          }
+          if ($argument_name == 'tid' && $argument_value['table'] == 'taxonomy_index') {
+            $element['argument'][$num] = [
+              '#type' => 'entity_autocomplete',
+              '#title' => t('Taxonomy term') . $title_extra,
+              '#default_value' => \Drupal\taxonomy\Entity\Term::load($argument_values[$num]),
+              '#target_type' => 'taxonomy_term',
+              '#selection_handler' => 'default:taxonomy_term',
+              '#selection_settings' => [],
+            ];
+            $num++;
+            continue;
+          }
+          if ($argument_name == 'nid' && $argument_value['table'] == 'node_field_data') {
+            $element['argument'][$num] = [
+              '#type' => 'entity_autocomplete',
+              '#title' => t('Node') . $title_extra,
+              '#default_value' => \Drupal\node\Entity\Node::load($argument_values[$num]),
+              '#target_type' => 'node',
+              '#selection_handler' => 'default:node',
+              '#selection_settings' => [],
+            ];
+            $num++;
+            continue;
+          }
+          if ($argument_name == 'uid' && $argument_value['table'] == 'node_field_data') {
+            $element['argument'][$num] = [
+              '#type' => 'entity_autocomplete',
+              '#title' => t('User') . $title_extra,
+              '#default_value' => \Drupal\user\Entity\User::load($argument_values[$num]),
+              '#target_type' => 'user',
+              '#selection_handler' => 'default:user',
+              '#selection_settings' => [],
+            ];
+            $num++;
+            continue;
+          }
+          // Get field info.
+          $info = _views_argument_field_info($argument_value);
+          $field_info = $info['info'];
+          $bundle_info = $info['bundle_info'];
+          if ($field_info) {
+            $element['argument'][$num] = [
+              '#type' => ($field_info->getType() == 'entity_reference') ? 'entity_autocomplete' : 'textfield',
+              '#title' => empty($bundle_info) ? $field_info->getLabel() : $bundle_info->getLabel(),
+              '#description' => empty($bundle_info) ? $field_info->getDescription() : $bundle_info->getDescription(),
+              '#default_value' => !empty($argument_values[$num]) ? $argument_values[$num] : '',
+            ];
+            $element['argument'][$num]['#title'] .= $title_extra;
+
+            // If it is entity reference and some more settings.
+            if (($field_info->getType() == 'entity_reference')) {
+              $info_settings = $field_info->getSettings();
+              $bundle_settings = $bundle_info->getSettings();
+              $element['argument'][$num]['#target_type'] = $info_settings['target_type'];
+              $element['argument'][$num]['#selection_handler'] = $bundle_settings['handler'];
+              $element['argument'][$num]['#selection_settings'] = [];
+              $element['argument'][$num]['#selection_settings']['target_bundles'] = $bundle_settings['handler_settings']['target_bundles'];
+              // Default value could be only entity, let's load one.
+              $entity_storage = \Drupal::entityManager()
+                ->getStorage($info_settings['target_type']);
+              $entity = $entity_storage->load($element['argument'][$num]['#default_value']);
+              $element['argument'][$num]['#default_value'] = $entity ? $entity : '';
+            }
+          }
+          else {
+            // This is not field but property of the entity.
+            $property = array_shift($argument);
+            $element['argument'][$num] = [
+              '#type' => 'textfield',
+              '#title' => $property['field'],
+              '#default_value' => !empty($argument_values[$num]) ? $argument_values[$num] : '',
+            ];
+          }
+          $num++;
+        }
+      }
+    }
+
+    $element['argument']['#prefix'] = '<details id="' . $arguments_wrapper_selector . '_arg" class="form-wrapper">';
+    $element['argument']['#prefix'] .= '<summary role="button" aria-controls="' . $arguments_wrapper_selector . '_arg" aria-expanded="false" aria-pressed="false">' . t('View arguments') . '</summary>';
+    $element['argument']['#weight'] = $arguments_weight;
+    $element['argument']['#states'] = $argument_states;
+    $element['argument']['#suffix'] = '</details>';
+    $view_modes = ['' => t('As defined in the view')] + \Drupal::service('entity_display.repository')
+        ->getViewModeOptions($entity_type);
+    if (empty($extra_data['view_mode']) || !in_array($extra_data['view_mode'], array_keys($view_modes))) {
+      $extra_data['view_mode'] = '';
+    }
+    $element['view_mode'] = [
+      '#type' => 'select',
+      '#title' => t('Views row view mode'),
+      '#default_value' => !empty($extra_data['view_mode']) ? $extra_data['view_mode'] : '',
+      '#options' => $view_modes,
+      '#weight' => 11,
+      '#attributes' => ['class' => ['viewsreference_view_mode']],
+    ];
+    $element['options']['#prefix'] = '<div id="' . $arguments_wrapper_selector . '" class="form-wrapper">';
+    $element['options']['#suffix'] = '</div>';
+    $element['options']['#weight'] = 100;
+    $element['options']['argument'] = $element['argument'];
+    $element['options']['page_limit'] = $element['page_limit'];
+    $element['options']['view_mode'] = $element['view_mode'];
+    unset($element['argument']);
+    unset($element['view_mode']);
+    unset($element['page_limit']);
+  }
+
+  /** @var \Drupal\Core\Field\WidgetBase $widget */
+  $widget = $context['widget'];
+  // Add the view_mode_selector library on every image paragraph.
+  if ($widget->getPluginId() == 'paragraphs' && !empty($element['subform']['field_image'])) {
+    $element['#attached']['library'][] = 'xi_paragraphs/view_mode_selector';
+    $field_name = _selector_get_state_name($element['subform']['field_image']['widget']);
+    $element['subform']['field_view_mode']['widget']['#states'] = [
+      'visible' => [
+        ':input[name="' . $field_name . '[target_id]"]' => [
+          '!value' => ''
+        ]
+      ]
+    ];
+  }
+  if (in_array($widget->getPluginId(), ['entity_browser_entity_reference'])) {
+    $formObject = $form_state->getFormObject();
+    if ($formObject instanceof \Drupal\paragraphs_edit\Form\ParagraphEditForm) {
+      $paragraph = $formObject->getEntity();
+      if ($paragraph->bundle() == 'media_reference') {
+        $element['#attached']['library'][] = 'xi_paragraphs/view_mode_selector';
+      }
+    }
+  }
+
+}
+
+/**
+ * Get the correct nested form element name.
+ *
+ * @param $element
+ *
+ * @return string
+ */
+function _selector_get_state_name($element) {
+  $selector = $element['#parents'];
+  $start = array_shift($selector);
+  return $start . '[' . implode('][', $selector) . ']';
+}
+
+function xi_paragraphs_preprocess_paragraph(&$variables) {
+  if($variables['paragraph']->getType() == 'gallery') {
+    $variables['#attached']['library'][] = 'xi_paragraphs/photoswipe';
+  }
+}
+
+/**
+ * Adds allowed paragraph bundle to the field config.
+ *
+ * @param $entity_type_id
+ *   Entity type of the destination entity.
+ * @param $bundle
+ *   Entity bundle of the destination entity.
+ * @param $field_name
+ *   Field Name of the destination entity.
+ * @param $bundle_to_add
+ *   Bundle name to add to the field config of destination entity
+ *
+ * @throws \Drupal\Core\Entity\EntityStorageException
+ */
+function xi_paragraphs_add_enabled_bundles($entity_type_id, $bundle, $field_name, $bundle_to_add) {
+  // Load page reference field.
+  $field_config = \Drupal\field\Entity\FieldConfig::loadByName($entity_type_id, $bundle, $field_name);
+  if (!empty($field_config) && $field_config->getType() == 'entity_reference_revisions') {
+    $handler_settings = $field_config->getSetting('handler_settings');
+    if (!isset($handler_settings['target_bundles'])) {
+      $handler_settings['target_bundles'] = [];
+    }
+    $handler_settings['target_bundles'] = array_merge($handler_settings['target_bundles'], [$bundle_to_add => $bundle_to_add]);
+    if (!isset($handler_settings['target_bundles_drag_drop'])) {
+      $handler_settings['target_bundles_drag_drop'] = [];
+    }
+    $handler_settings['target_bundles_drag_drop'] = array_merge($handler_settings['target_bundles_drag_drop'], [$bundle_to_add => ['weight' => 0, 'enabled' => TRUE]]);
+    // Add new allowed bundles.
+    $field_config->setSetting('handler_settings', $handler_settings);
+    // Save configuration
+    $field_config->save();
+  }
+}
+
+/**
+ * Implements hook_preprocess_field().
+ */
+function xi_paragraphs_preprocess_field(&$variables) {
+  $entity = $variables['element']['#items']->getEntity();
+  if ($entity instanceof \Drupal\paragraphs\ParagraphInterface) {
+    // Check if paragraph has layout behaviour.
+    $layout = $entity->getBehaviorSetting('paragraph_teaser_layout', 'teaser_layout');
+    if ($layout) {
+      \Drupal\xi_paragraphs\Plugin\paragraphs\Behavior\ParagraphsLayoutPlugin::populateVariables($variables, $layout);
+    }
+    if ($variables['field_name'] == 'field_media') {
+      if ($entity->bundle() == 'gallery') {
+        /** @var \Drupal\Core\Field\Plugin\Field\FieldType\EntityReferenceItem $item */
+        foreach ($variables['element']['#items']->getIterator() as $key => $item) {
+          $media = $item->entity;
+          if ($media instanceof \Drupal\media\MediaInterface && $media->bundle() == 'image') {
+            $uri = $media->getSource()->getMetadata($media, 'thumbnail_uri');
+            if ($uri) {
+              $variables['items'][$key]['attributes']->setAttribute('data-remote', file_url_transform_relative(file_create_url($uri)));
+              $variables['items'][$key]['attributes']->setAttribute('data-toggle', 'lightbox');
+              $variables['items'][$key]['attributes']->setAttribute('data-gallery', 'gallery-' . $entity->id());
+            }
+          }
+        }
+      }
+    }
+  }
+}
+

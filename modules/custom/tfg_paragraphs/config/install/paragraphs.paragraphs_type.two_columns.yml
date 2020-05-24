@@ -1,0 +1,14 @@
+status: true
+dependencies: {  }
+id: two_columns
+label: 'Two columns'
+icon_uuid: null
+description: ''
+behavior_plugins:
+  paragraph_width:
+    enabled: true
+    default_width: wide
+    options:
+      full: Full
+      wide: Wide
+      narrow: Narrow

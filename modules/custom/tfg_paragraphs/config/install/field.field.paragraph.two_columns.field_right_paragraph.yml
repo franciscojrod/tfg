@@ -1,0 +1,62 @@
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_right_paragraph
+    - paragraphs.paragraphs_type.block_reference
+    - paragraphs.paragraphs_type.gallery
+    - paragraphs.paragraphs_type.image
+    - paragraphs.paragraphs_type.page_reference
+    - paragraphs.paragraphs_type.slideshow
+    - paragraphs.paragraphs_type.text
+    - paragraphs.paragraphs_type.two_columns
+    - paragraphs.paragraphs_type.view_reference
+  module:
+    - entity_reference_revisions
+id: paragraph.two_columns.field_right_paragraph
+field_name: field_right_paragraph
+entity_type: paragraph
+bundle: two_columns
+label: 'Right Paragraph'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      block_reference: block_reference
+      page_reference: page_reference
+      text: text
+      image: image
+    target_bundles_drag_drop:
+      two_columns:
+        weight: 9
+        enabled: false
+      block_reference:
+        enabled: true
+        weight: 10
+      gallery:
+        weight: 11
+        enabled: false
+      image:
+        enabled: true
+        weight: 13
+      page_reference:
+        enabled: true
+        weight: 13
+      slideshow:
+        weight: 14
+        enabled: false
+      text:
+        enabled: true
+        weight: 15
+      slide:
+        weight: 16
+        enabled: false
+      view_reference:
+        weight: 16
+        enabled: false
+field_type: entity_reference_revisions

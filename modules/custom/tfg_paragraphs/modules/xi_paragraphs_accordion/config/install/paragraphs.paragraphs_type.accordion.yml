@@ -1,0 +1,19 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - xi_paragraphs
+id: accordion
+label: Accordion
+icon_uuid: null
+description: ''
+behavior_plugins:
+  paragraph_width:
+    default_width: Wide
+    options:
+      full: Full
+      wide: Wide
+      narrow: Narrow
+    excluded_fields: {  }
+  paragraph_zoom:
+    default_zoom: 0

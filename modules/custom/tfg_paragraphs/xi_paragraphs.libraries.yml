@@ -1,0 +1,23 @@
+photoswipe:
+  version: 4.1.2
+  js:
+    /libraries/photoswipe/dist/photoswipe.min.js: {}
+    /libraries/photoswipe/dist/photoswipe-ui-default.min.js: {}
+    js/photoswipe.js: {}
+  css:
+    base:
+      /libraries/photoswipe/dist/photoswipe.css: {}
+    theme:
+      /libraries/photoswipe/dist//default-skin/default-skin.css: {}      
+
+viewsreference:
+  version: 1.0
+  js:
+    js/viewsreference.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+
+view_mode_selector:
+  js:
+    js/view-mode-selector.js: {}

@@ -1,0 +1,20 @@
+status: true
+dependencies:
+  module:
+    - node
+id: news
+label: News
+type: 'canonical_entities:node'
+pattern: 'news/[node:field_category]/[node:title]'
+selection_criteria:
+  88b65f7f-71a6-4a72-90fe-a7b7b1725343:
+    id: node_type
+    bundles:
+      news: news
+    negate: false
+    context_mapping:
+      node: node
+    uuid: 88b65f7f-71a6-4a72-90fe-a7b7b1725343
+selection_logic: and
+weight: -7
+relationships: {  }
